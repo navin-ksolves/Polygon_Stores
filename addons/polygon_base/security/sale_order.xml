@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Define the new access rules -->
+        <record model="ir.rule" id="sale_order_polygon_client_rule">
+            <field name="name">Sales Order multi-company Polygon Client</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[Command.link(ref('group_client_user'))]"/>
+            <field name="domain_force">[
+                '|',
+                ('user_id', '=', user.id),
+                ('user_id','=',False),
+                ('team_id','=',user.sale_team_id.id),
+                ('company_id', '=', False),
+                ('company_id','in',company_ids)]
+            </field>
+        </record>
+    </data>
+</odoo>

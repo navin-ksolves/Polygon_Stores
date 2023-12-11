@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid State Form View -->
+    <record id="zid_state_master_form_view" model="ir.ui.view">
+        <field name="name">zid.state_master_form_view</field>
+        <field name="model">zid.state.master</field>
+        <field name="arch" type="xml">
+            <form string="Zid Master States">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="zid_state_id"/>
+                            <field name="name"/>
+                            <field name="odoo_state"/>
+                        </group>
+                        <group>
+                            <field name="zid_country_id"/>
+                            <field name="odoo_country"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid State Tree View -->
+    <record id="zid_state_master_tree_view" model="ir.ui.view">
+        <field name="name">zid.zid_state_master_tree_view</field>
+        <field name="model">zid.state.master</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Master States" editable="bottom">
+                <field name="zid_state_id"/>
+                <field name="name"/>
+                <field name="odoo_state"/>
+                <field name="zid_country_id"/>
+                <field name="odoo_country"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Zid State Master Search View-->
+    <record id="view_state_master_filter" model="ir.ui.view">
+        <field name="name">state.master.serach</field>
+        <field name="model">zid.state.master</field>
+        <field name="arch" type="xml">
+            <search string="Zid State Master">
+                <filter string="Odoo State Not Set" name="odoo_state_not_set" domain="[('odoo_state','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid State -->
+    <record id="action_zid_state_master" model="ir.actions.act_window">
+        <field name="name">Zid State Master</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.state.master</field>
+        <field name="view_mode">tree,form</field>
+         <field name="context">{"search_default_odoo_state_not_set":1}</field>
+    </record>
+
+
+</odoo>

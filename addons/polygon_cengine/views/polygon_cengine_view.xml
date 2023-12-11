@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <menuitem id="polygon_cengine_root_menu"
+                name="Polygon Cengine"
+                parent="polygon_base.polygon_root_menu"
+                sequence="12"/>
+
+        <record id="cengine_customer_ept_form" model="ir.ui.view">
+                <field name="name">cengine.customer.ept.form</field>
+                <field name="model">cengine.customer.ept</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Customer EPT Details">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="email"/>
+                                                <field name="phone"/>
+                                                <field name="customer_partner_id"/>
+                                                <field name="instance_id"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_customer_ept" model="ir.actions.act_window">
+                <field name="name">Cengine Customer EPT</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">cengine.customer.ept</field>
+                <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_customer_ept_list"
+                name="Cengine Customer EPT List"
+                action="cengine_customer_ept"
+                parent="polygon_cengine.polygon_cengine_root_menu"
+                sequence="1"/>
+
+        <record id="cengine_customer_locations_form" model="ir.ui.view">
+                <field name="name">cengine.customer.locations.form</field>
+                <field name="model">cengine.customer.locations</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Customer Locations">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="customer_id"/>
+                                                <field name="address_id"/>
+                                                <field name="street"/>
+                                                <field name="street2"/>
+                                                <field name="city"/>
+                                                <field name="state"/>
+                                                <field name="country"/>
+                                                <field name="is_billing"/>
+                                                <field name="is_shipping"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+
+        <record id="cengine_customer_locations" model="ir.actions.act_window">
+            <field name="name">Cengine Customer Locations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.customer.locations</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_customer_locations_list"
+                  name="Cengine Customer Locations List"
+                  action="cengine_customer_locations"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="2"/>
+
+        <record id="cengine_instance_ept_form" model="ir.ui.view">
+                <field name="name">cengine.instance.ept.form</field>
+                <field name="model">cengine.instance.ept</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Instance EPT Details">
+                                <sheet>
+                                        <group name="general_settings" string="Instance Parameters">
+                                                <field name="name"/>
+                                                <field name="polygon_instance_id"/>
+                                                <field name="access_token"/>
+                                                <field name="secret_key" groups="polygon_base.group_polygon_tech"/>
+                                                <field name="host_name"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <notebook colspan="4">
+                                                <page name="order_counts" string="Order Counts" autofocus="autofocus">
+                                                        <group>
+                                                                <field name="orders_today"/>
+                                                                <field name="orders_this_week"/>
+                                                                <field name="orders_this_month"/>
+                                                                <field name="orders_this_year"/>
+                                                                <field name="orders_yesterday"/>
+                                                                <field name="orders_last_week"/>
+                                                                <field name="orders_last_month"/>
+                                                                <field name="orders_last_year"/>
+                                                        </group>
+                                                </page>
+                                                <page name="cengine_instance_technical" string="Technical Settings">
+                                                        <group>
+                                                                <field name="polygon_connector_id" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="default_user" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="sales_team_id" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="pricelist_id" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="notify_customer" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="sync_with_images" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="company_id" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="warehouse_id" groups="polygon_base.group_polygon_tech"/>
+                                                        </group>
+                                                </page>
+                                                <page name="webhooks" string="Webhooks">
+                                                        <field name="webhook_ids"/>
+                                                        <button name="create_cengine_webhooks" string="Create Webhooks" class="oe_highlight" type="object" attrs="{'invisible': [('webhook_ids', '!=', [])]}"/>
+                                                        <button name="delete_cengine_webhooks" string="Delete Webhooks" class="oe_highlight" type="object" attrs="{'invisible': [('webhook_ids', '=', [])]}"/>
+                                                </page>
+                                                <page name="import_history" string="Import History">
+                                                        <group>
+                                                                <field name="last_customer_import" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="last_product_import" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="last_order_import" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="last_product_export" groups="polygon_base.group_polygon_tech"/>
+                                                                <button name="cengine_products_force" string="Force Products Import" class="oe-danger" type="object" groups="polygon_base.group_polygon_tech"/>
+                                                                <field name="import_orders_after_date" groups="polygon_base.group_polygon_tech"/>
+                                                        </group>
+                                                </page>
+                                        </notebook>
+                                </sheet>
+                                <div class="oe_chatter">
+                                        <field name="message_follower_ids"/>
+                                        <field name="message_ids"/>
+                                </div>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_instance_ept" model="ir.actions.act_window">
+            <field name="name">Cengine Instance EPT</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.instance.ept</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_instance_ept_list"
+                  name="Cengine Instance EPT List"
+                  action="cengine_instance_ept"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="3"/>
+
+        <record id="cengine_log_book_form" model="ir.ui.view">
+                <field name="name">cengine.log.book.form</field>
+                <field name="model">cengine.log.book</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Log Book Details">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="type"/>
+                                                <field name="log_lines"/>
+                                                <field name="message"/>
+                                                <field name="model_id"/>
+                                                <field name="res_id"/>
+                                                <field name="attachment_id"/>
+                                                <field name="file_name"/>
+                                                <field name="sale_order_id"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_log_book" model="ir.actions.act_window">
+            <field name="name">Cengine Log Book</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.log.book</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_log_book_list"
+                  name="Cengine Log Book List"
+                  action="cengine_log_book"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="4"/>
+
+         <record id="cengine_scheduler_form" model="ir.ui.view">
+                <field name="name">cengine.scheduler.ept.form</field>
+                <field name="model">cengine.scheduler.ept</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Scheduler">
+                                <sheet>
+                                        <group>
+                                                <field name="schedule_type"/>
+                                                <field name="instance_id"/>
+                                                <field name="owner_id"/>
+                                                <field name="data"/>
+                                                <field name="state"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_scheduler_ept" model="ir.actions.act_window">
+            <field name="name">Cengine Scheduler</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.scheduler.ept</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_scheduler_ept_list"
+                  name="Cengine Scheduler List"
+                  action="cengine_scheduler_ept"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="5"/>
+
+        <record id="cengine_order_ept_form" model="ir.ui.view">
+                <field name="name">cengine.order.ept.form</field>
+                <field name="model">cengine.order.ept</field>
+                <field name="arch" type="xml">
+                        <form string="Conversion Engine Order">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="online_order_id"/>
+                                                <field name="order_partner_id"/>
+                                                <field name="so_id"/>
+                                                <field name="instance_id"/>
+                                                <field name="order_datetime"/>
+                                                <field name="fulfillment_status"/>
+                                                <field name="financial_status"/>
+                                                <field name="currency"/>
+                                                <field name="payment_method"/>
+                                                <field name="subtotal_price"/>
+                                                <field name="discount_code"/>
+                                                <field name="discount_type"/>
+                                                <field name="total_discount"/>
+                                                <field name="shipping_method"/>
+                                                <field name="shipping_price"/>
+                                                <field name="taxes"/>
+                                                <field name="total_tax"/>
+                                                <field name="total_price"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_order_ept" model="ir.actions.act_window">
+            <field name="name">Cengine Order EPT</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.order.ept</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_order_ept_list"
+                  name="Cengine Order EPT List"
+                  action="cengine_order_ept"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="6"/>
+
+        <record id="cengine_order_lines_ept_form" model="ir.ui.view">
+                <field name="name">cengine.order.lines.ept.form</field>
+                <field name="model">cengine.order.lines.ept</field>
+                <field name="arch" type="xml">
+                        <form string="Conversion Engine Order Lines">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="order_id"/>
+                                                <field name="so_line_id"/>
+                                                <field name="product_id"/>
+                                                <field name="item_id"/>
+                                                <field name="quantity"/>
+                                                <field name="price"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_order_lines_ept" model="ir.actions.act_window">
+            <field name="name">Cengine Order Lines EPT</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.order.lines.ept</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_order_lines_ept_list"
+                  name="Cengine Order Lines EPT List"
+                  action="cengine_order_lines_ept"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="7"/>
+
+        <record id="cengine_product_template_form" model="ir.ui.view">
+                <field name="name">cengine.product.template.form</field>
+                <field name="model">cengine.product.template</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Products Template">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="description"/>
+                                                <field name="owner_id"/>
+                                                <field name="instance_id"/>
+                                                <field name="cengine_product_template_id"/>
+                                                <field name="product_id"/>
+                                                <field name="cengine_product_template_url"/>
+                                                <field name="cengine_product_template_type"/>
+                                                <field name="cengine_product_template_status"/>
+                                                <field name="has_variants"/>
+                                                <field name="default_shipping"/>
+                                                <field name="default_discount"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_product_template" model="ir.actions.act_window">
+            <field name="name">Cengine Product Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.product.template</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_product_template_list"
+                  name="Cengine Product Template List"
+                  action="cengine_product_template"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="8"/>
+
+        <record id="cengine_product_template_image_form" model="ir.ui.view">
+                <field name="name">cengine.product.template.image.form</field>
+                <field name="model">cengine.product.template.image</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Products Template Image">
+                                <sheet>
+                                        <group>
+                                                <field name="url"/>
+                                                <field name="cengine_product_template_id"/>
+                                                <field name="common_image_ept_id"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_product_template_image" model="ir.actions.act_window">
+            <field name="name">Cengine Product Template Image</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.product.template.image</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_product_template_image_list"
+                  name="Cengine Product Template Image List"
+                  action="cengine_product_template_image"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="9"/>
+
+        <record id="cengine_product_category_form" model="ir.ui.view">
+                <field name="name">cengine.product.category.form</field>
+                <field name="model">cengine.product.category</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Products Category">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="cengine_product_category_id"/>
+                                                <field name="cengine_product_category_url"/>
+                                                <field name="parent_category_id"/>
+                                                <field name="category_id"/>
+                                                <field name="owner_id"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_product_category" model="ir.actions.act_window">
+            <field name="name">Cengine Product Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.product.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_product_category_list"
+                  name="Cengine Product Category List"
+                  action="cengine_product_category"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="10"/>
+
+        <record id="cengine_product_options_form" model="ir.ui.view">
+                <field name="name">cengine.product.options.form</field>
+                <field name="model">cengine.product.options</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Products options">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="advanced"/>
+                                                <field name="product_attribute"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_product_options" model="ir.actions.act_window">
+            <field name="name">Cengine Product Options</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.product.options</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_product_options_list"
+                  name="Cengine Product Options List"
+                  action="cengine_product_options"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="11"/>
+
+        <record id="cengine_product_option_values_form" model="ir.ui.view">
+                <field name="name">cengine.product.option.values.form</field>
+                <field name="model">cengine.product.option.values</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Products options values">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="cengine_product_options_id"/>
+                                                <field name="product_attribute_value"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_product_option_values" model="ir.actions.act_window">
+            <field name="name">Cengine Product Option Values</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.product.option.values</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_product_option_values_list"
+                  name="Cengine Product Option Values List"
+                  action="cengine_product_option_values"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="12"/>
+
+        <record id="cengine_product_variants_form" model="ir.ui.view">
+                <field name="name">cengine.product.variants.form</field>
+                <field name="model">cengine.product.variants</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Products variants">
+                                <sheet>
+                                        <group>
+                                                <field name="sku"/>
+                                                <field name="price"/>
+                                                <field name="sale_price"/>
+                                                <field name="on_sale"/>
+                                                <field name="quantity"/>
+                                                <field name="weight"/>
+                                                <field name="cengine_product_template_id"/>
+                                                <field name="combination_indices_internal"/>
+                                                <field name="combination_indices_external"/>
+                                                <field name="product_variant_id"/>
+                                                <field name="owner_id"/>
+                                                <field name="active"/>
+                                        </group>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_product_variants" model="ir.actions.act_window">
+            <field name="name">Cengine Product Variants</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.product.variants</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_product_variants_list"
+                  name="Cengine Product Variants List"
+                  action="cengine_product_variants"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="13"/>
+
+        <record id="cengine_webhook_ept_form" model="ir.ui.view">
+                <field name="name">cengine.webhook.ept.form</field>
+                <field name="model">cengine.webhook.ept</field>
+                <field name="arch" type="xml">
+                        <form string="Cengine Webhook EPT Details">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="instance_id"/>
+                                                <field name="url"/>
+                                                <field name="active"/>
+                                                <field name="webhook_type"/>
+                                                <field name="response_webhook_id"/>
+                                                <field name="last_run"/>
+                                                <field name="active"/>
+                                        </group>
+                                        <div class="oe_chatter">
+                                                <field name="message_follower_ids"/>
+                                                <field name="message_ids"/>
+                                        </div>
+                                </sheet>
+                        </form>
+                </field>
+        </record>
+
+        <record id="cengine_webhook_ept" model="ir.actions.act_window">
+            <field name="name">Cengine Webhook EPT</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cengine.webhook.ept</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cengine_webhook_ept_list"
+                  name="Cengine Webhook EPT List"
+                  action="cengine_webhook_ept"
+                  parent="polygon_cengine.polygon_cengine_root_menu"
+                  sequence="14"/>
+
+</odoo>

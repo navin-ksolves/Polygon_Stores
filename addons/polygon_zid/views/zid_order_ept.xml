@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Order EPT Form View -->
+    <record id="zid_order_ept_form" model="ir.ui.view">
+        <field name="name">zid.order.ept.form</field>
+        <field name="model">zid.order.ept</field>
+        <field name="arch" type="xml">
+            <form string="Zid Order EPT">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="online_order_id"/>
+                            <field name="order_partner_id"/>
+                            <field name="so_id"/>
+                            <field name="instance_id"/>
+                            <field name="order_datetime"/>
+                            <field name="fulfillment_status"/>
+                            <field name="financial_status"/>
+                            <field name="currency"/>
+                        </group>
+                        <group>
+                            <field name="payment_method"/>
+                            <field name="subtotal_price"/>
+                            <field name="discount_code"/>
+                            <field name="discount_type"/>
+                            <field name="total_discount"/>
+                            <field name="shipping_method"/>
+                            <field name="shipping_price"/>
+                            <field name="taxes"/>
+                            <field name="total_tax"/>
+                            <field name="total_price"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Order EPT Tree View -->
+    <record id="zid_order_ept_tree_view" model="ir.ui.view">
+        <field name="name">zid.order.ept.tree</field>
+        <field name="model">zid.order.ept</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Order EPT">
+                <field name="name"/>
+                <field name="online_order_id"/>
+                <field name="order_partner_id"/>
+                <field name="so_id"/>
+                <field name="instance_id"/>
+                <field name="order_datetime"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Order EPT-->
+    <record id="zid_order_ept_search_view" model="ir.ui.view">
+        <field name="name">zid.order.ept.search</field>
+        <field name="model">zid.order.ept</field>
+        <field name="arch" type="xml">
+            <search string="Zid Order EPT">
+                <field name="name"/>
+                <field name="online_order_id"/>
+                <field name="order_partner_id"/>
+                <field name="so_id"/>
+                <field name="instance_id"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Instance" name="group_by_instance" context="{'group_by': 'instance_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Order EPT -->
+    <record id="action_zid_order_ept" model="ir.actions.act_window">
+        <field name="name">Zid Order EPT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.order.ept</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

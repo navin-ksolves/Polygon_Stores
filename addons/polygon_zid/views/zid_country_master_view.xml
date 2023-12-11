@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Country Form View -->
+    <record id="zid_country_master_form_view" model="ir.ui.view">
+        <field name="name">zid.country_master_form_view</field>
+        <field name="model">zid.country.master</field>
+        <field name="arch" type="xml">
+            <form string="Zid Master Countries">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="zid_country_id"/>
+                            <field name="name"/>
+                            <field name="odoo_country"/>
+                            <field name="is_state_synced"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Country Tree View -->
+    <record id="zid_country_master_tree_view" model="ir.ui.view">
+        <field name="name">zid.zid_country_master_form_view</field>
+        <field name="model">zid.country.master</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Master Countries" editable="bottom">
+                <field name="zid_country_id"/>
+                <field name="name"/>
+                <field name="odoo_country"/>
+                <field name="is_state_synced"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Zid Country Master Search View-->
+    <record id="view_country_master_filter" model="ir.ui.view">
+        <field name="name">country.master.serach</field>
+        <field name="model">zid.country.master</field>
+        <field name="arch" type="xml">
+            <search string="Zid Country Master">
+                <filter string="Odoo Country Not Set" name="odoo_country_not_set" domain="[('odoo_country','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Country -->
+    <record id="action_zid_country_master" model="ir.actions.act_window">
+        <field name="name">Zid Country Master</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.country.master</field>
+        <field name="view_mode">tree,form</field>
+                 <field name="context">{"search_default_odoo_country_not_set":1}</field>
+    </record>
+</odoo>

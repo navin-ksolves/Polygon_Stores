@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Customer Locations Form View -->
+    <record id="zid_customer_ept_form_view" model="ir.ui.view">
+        <field name="name">zid.customer.locations.form</field>
+        <field name="model">zid.customer.locations</field>
+        <field name="arch" type="xml">
+            <form string="Zid Customer Locations Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="customer_id"/>
+                            <field name="address_id"/>
+                            <field name="street"/>
+                            <field name="street2"/>
+<!--                            <field name="city"/>-->
+                            <field name="state"/>
+                            <field name="country"/>
+                        </group>
+                        <group>
+                            <field name="is_billing"/>
+                            <field name="is_shipping"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Customer Locations Tree View -->
+    <record id="zid_customer_locations_tree_view" model="ir.ui.view">
+        <field name="name">zid.customer.locations.tree</field>
+        <field name="model">zid.customer.locations</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Customer Locations">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="address_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Customer Locations-->
+    <record id="zid_customer_locations_search_view" model="ir.ui.view">
+        <field name="name">zid.customer.locations.search</field>
+        <field name="model">zid.customer.locations</field>
+        <field name="arch" type="xml">
+            <search string="Zid Customer Locations">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="address_id"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Customer Locations -->
+    <record id="action_zid_customer_locations" model="ir.actions.act_window">
+        <field name="name">Zid Customer Locations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.customer.locations</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

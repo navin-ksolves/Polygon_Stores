@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Scheduler Log Form View -->
+    <record id="zid_scheduler_log_line_form_view" model="ir.ui.view">
+        <field name="name">zid.scheduler.log.line.form</field>
+        <field name="model">zid.scheduler.log.line</field>
+        <field name="arch" type="xml">
+            <form string="Zid Scheduler Log Line">
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="instance_id"/>
+                            <field name="scheduler_type"/>
+                            <field name="scheduler_log_id"/>
+                        </group>
+                        <group>
+                            <field name="attempts"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Json Data">
+                            <field name="json"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Scheduler Log Tree View -->
+    <record id="zid_scheduler_log_line_tree_view" model="ir.ui.view">
+        <field name="name">zid.scheduler.log.line.tree</field>
+        <field name="model">zid.scheduler.log.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Scheduler Log Line">
+                <field name="instance_id"/>
+                <field name="scheduler_type"/>
+                <field name="attempts"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--- Zid Scheduler Log Search View -->
+    <record id="zid_scheduler_log_line_search_view" model="ir.ui.view">
+        <field name="name">zid.scheduler.log.line.search</field>
+        <field name="model">zid.scheduler.log.line</field>
+        <field name="arch" type="xml">
+            <search string="Zid Scheduler Log Line">
+                <field name="instance_id"/>
+                <field name="attempts"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Scheduler Log -->
+    <record id="action_zid_scheduler_log_line" model="ir.actions.act_window">
+        <field name="name">Zid Scheduler Log Line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.scheduler.log.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

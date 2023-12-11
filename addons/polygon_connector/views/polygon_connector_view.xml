@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="polygon_connector_clients_form" model="ir.ui.view">
+                <field name="name">polygon.connector.clients.form</field>
+                <field name="model">polygon.connector.clients</field>
+                <field name="arch" type="xml">
+                        <form string="Connector Client Details">
+                                <sheet>
+                                        <group>
+                                                <field name="client_id"/>
+                                                <field name="connector_id"/>
+                                                <field name="active"/>
+                                        </group>
+                                </sheet>
+                                <div class="oe_chatter">
+                                        <field name="message_follower_ids"/>
+                                        <field name="message_ids"/>
+                                </div>
+                        </form>
+                </field>
+        </record>
+
+        <record id="polygon_connector_requests_form" model="ir.ui.view">
+                <field name="name">polygon.connector.requests.form</field>
+                <field name="model">polygon.connector.requests</field>
+                <field name="arch" type="xml">
+                        <form string="Connector Client Requests">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="client_id"/>
+                                                <field name="request_description"/>
+                                                <field name="requested_by"/>
+                                                <field name="status" groups="polygon_base.group_polygon_tech"/>
+                                                <field name="connector_id"/>
+                                        </group>
+                                </sheet>
+                                <div class="oe_chatter">
+                                        <field name="message_follower_ids"/>
+                                        <field name="message_ids"/>
+                                </div>
+                        </form>
+                </field>
+        </record>
+
+        <record id="polygon_connector_types_form" model="ir.ui.view">
+                <field name="name">polygon.connector.types.form</field>
+                <field name="model">polygon.connector.types</field>
+                <field name="arch" type="xml">
+                        <form string="Polygon Connector Types">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="connector_type"/>
+                                                <field name="connector_description"/>
+                                                <field name="connector_url"/>
+                                                <field name="connector_logo"/>
+                                                <field name="connector_model"/>
+                                                <field name="active"/>
+                                        </group>
+                                </sheet>
+                                <div class="oe_chatter">
+                                        <field name="message_follower_ids"/>
+                                        <field name="message_ids"/>
+                                </div>
+                        </form>
+                </field>
+        </record>
+
+        <record id="polygon_instance_form" model="ir.ui.view">
+                <field name="name">polygon.instance.form</field>
+                <field name="model">polygon.instance</field>
+                <field name="arch" type="xml">
+                        <form string="Polygon Instance">
+                                <sheet>
+                                        <group>
+                                                <field name="name"/>
+                                                <field name="connector_id"/>
+                                                <field name="active"/>
+                                        </group>
+                                </sheet>
+                                <div class="oe_chatter">
+                                        <field name="message_follower_ids"/>
+                                        <field name="message_ids"/>
+                                </div>
+                        </form>
+                </field>
+        </record>
+
+        <record id="polygon_connector_clients" model="ir.actions.act_window">
+                <field name="name">Connector Clients</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">polygon.connector.clients</field>
+                <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="polygon_connector_requests" model="ir.actions.act_window">
+                <field name="name">Connector Client Requests</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">polygon.connector.requests</field>
+                <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="polygon_connector_types" model="ir.actions.act_window">
+                <field name="name">Polygon Connector Types</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">polygon.connector.types</field>
+                <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="polygon_instance" model="ir.actions.act_window">
+                <field name="name">Polygon Instance</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">polygon.instance</field>
+                <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="polygon_connector_root_menu"
+                name="Polygon Connector"
+                parent="polygon_base.polygon_root_menu"
+                sequence="11"/>
+
+        <menuitem id="polygon_connector_clients_list"
+                name="Connector Clients"
+                action="polygon_connector_clients"
+                parent="polygon_connector.polygon_connector_root_menu"
+                sequence="1"/>
+        
+        <menuitem id="polygon_connector_requests_list"
+                name="Requests"
+                action="polygon_connector_requests"
+                parent="polygon_connector.polygon_connector_root_menu"
+                sequence="2"/>
+
+        <menuitem id="polygon_connector_types_list"
+                name="Connector Types"
+                action="polygon_connector_types"
+                parent="polygon_connector.polygon_connector_root_menu"
+                sequence="3"/>
+
+        <menuitem id="polygon_instance_list"
+                name="Polygon Instance"
+                action="polygon_instance"
+                parent="polygon_connector.polygon_connector_root_menu"
+                sequence="4"/>
+
+</odoo>

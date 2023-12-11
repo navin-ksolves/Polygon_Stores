@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Request Form View -->
+    <record id="zid_request_form_view" model="ir.ui.view">
+        <field name="name">zid.request.form</field>
+        <field name="model">zid.request</field>
+        <field name="arch" type="xml">
+            <form string="Zid Request">
+                <header>
+                    <button name="continue_process" string="Continue Process" type="object" data-hotkey="z"
+                            attrs="{'invisible': [('is_processed', '=', True)]}" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="app_id"/>
+                            <field name="store_id"/>
+                            <field name="store_url"/>
+                            <field name="event"/>
+                        </group>
+                        <group>
+                            <field name="merchant_email"/>
+                            <field name="merchant_phone"/>
+                            <field name="is_processed"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Request Tree View -->
+    <record id="zid_request_tree_view" model="ir.ui.view">
+        <field name="name">zid.request.tree</field>
+        <field name="model">zid.request</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Request">
+                <field name="app_id"/>
+                <field name="store_id"/>
+                <field name="store_url"/>
+                <field name="event"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Request-->
+    <record id="zid_request_search_view" model="ir.ui.view">
+        <field name="name">zid.request.search</field>
+        <field name="model">zid.request</field>
+        <field name="arch" type="xml">
+            <search string="Zid Request">
+                <field name="app_id"/>
+                <field name="store_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid request -->
+    <record id="action_zid_request" model="ir.actions.act_window">
+        <field name="name">Zid Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

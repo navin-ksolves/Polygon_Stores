@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Tokens Form View -->
+    <record id="zid_tokens_form_view" model="ir.ui.view">
+        <field name="name">zid.tokens.form</field>
+        <field name="model">zid.tokens</field>
+        <field name="arch" type="xml">
+            <form string="Zid Tokens">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="access_token"/>
+                            <field name="token_type"/>
+                            <field name="expires_in"/>
+                            <field name="authorization"/>
+                        </group>
+                        <group>
+                            <field name="refresh_token"/>
+                            <field name="zid_request_id"/>
+                            <field name="zid_instance_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Tokens Tree View -->
+    <record id="zid_tokens_tree_view" model="ir.ui.view">
+        <field name="name">zid.tokens.tree</field>
+        <field name="model">zid.tokens</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Tokens">
+                <field name="access_token"/>
+                <field name="token_type"/>
+                <field name="expires_in"/>
+                <field name="authorization"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Tokens-->
+    <record id="zid_tokens_search_view" model="ir.ui.view">
+        <field name="name">zid.tokens.search</field>
+        <field name="model">zid.tokens</field>
+        <field name="arch" type="xml">
+            <search string="Zid Tokens">
+                <field name="access_token"/>
+                <field name="token_type"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Tokens -->
+    <record id="action_zid_tokens" model="ir.actions.act_window">
+        <field name="name">Zid Tokens</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.tokens</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

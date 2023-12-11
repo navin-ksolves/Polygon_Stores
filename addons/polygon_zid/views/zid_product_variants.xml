@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Product Variants Form View -->
+    <record id="zid_product_variants_form_view" model="ir.ui.view">
+        <field name="name">zid.product.variants.form</field>
+        <field name="model">zid.product.variants</field>
+        <field name="arch" type="xml">
+            <form string="Zid Product Variants Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="zid_sku"/>
+                            <field name="price"/>
+                            <field name="sale_price"/>
+                            <field name="on_sale"/>
+                            <field name="quantity"/>
+                        </group>
+                        <group>
+                            <field name="weight"/>
+                            <field name="zid_product_template_id"/>
+                            <field name="product_variant_id"/>
+                            <field name="owner_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Product Variants Tree View -->
+    <record id="zid_product_variants_tree_view" model="ir.ui.view">
+        <field name="name">zid.product.variants.tree</field>
+        <field name="model">zid.product.variants</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Product Variants">
+                <field name="zid_sku"/>
+                <field name="price"/>
+                <field name="sale_price"/>
+                <field name="on_sale"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Product Variants -->
+    <record id="zid_product_variants_search_view" model="ir.ui.view">
+        <field name="name">zid.product.variants.search</field>
+        <field name="model">zid.product.variants</field>
+        <field name="arch" type="xml">
+            <search string="Zid Product Variants">
+                <field name="zid_sku"/>
+                <field name="price"/>
+                <field name="sale_price"/>
+                <field name="on_sale"/>
+                <field name="quantity"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Product Variants -->
+    <record id="action_zid_product_variants" model="ir.actions.act_window">
+        <field name="name">Zid Product Variants</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.product.variants</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+polygon_client_company.sales_access,Polygon Client Company - Sales,polygon_client.model_polygon_client_company,polygon_base.group_polygon_sales,1,1,1,0
+polygon_client_company.ops_manager_access,Polygon Client Company - Ops Manager,polygon_client.model_polygon_client_company,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_client_company.finance_access,Polygon Client Company - Finance,polygon_client.model_polygon_client_company,polygon_base.group_polygon_finance,1,0,0,0
+polygon_client_company.tech_access,Polygon Client Company - Tech,polygon_client.model_polygon_client_company,polygon_base.group_polygon_tech,1,0,0,0
+polygon_client_company.management_access,Polygon Client Company - Management,polygon_client.model_polygon_client_company,polygon_base.group_polygon_management,1,0,0,0
+polygon_client_company.super_admin,Polygon Client Company - Super Admin,polygon_client.model_polygon_client_company,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_client_users.sales_access,Polygon Client Users - Sales,polygon_client.model_polygon_client_users,polygon_base.group_polygon_sales,1,1,1,0
+polygon_client_users.ops_manager_access,Polygon Client Users - Ops Manager,polygon_client.model_polygon_client_users,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_client_users.finance_access,Polygon Client Users - Finance,polygon_client.model_polygon_client_users,polygon_base.group_polygon_finance,1,0,0,0
+polygon_client_users.tech_access,Polygon Client Users - Tech,polygon_client.model_polygon_client_users,polygon_base.group_polygon_tech,1,0,0,0
+polygon_client_users.management_access,Polygon Client Users - Management,polygon_client.model_polygon_client_users,polygon_base.group_polygon_management,1,0,0,0
+polygon_client_users.super_admin,Polygon Client Users - Super Admin,polygon_client.model_polygon_client_users,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_client_terms.sales_access,Polygon Client Terms - Sales,polygon_client.model_polygon_client_terms,polygon_base.group_polygon_sales,1,1,1,0
+polygon_client_terms.ops_manager_access,Polygon Client Terms - Ops Manager,polygon_client.model_polygon_client_terms,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_client_terms.finance_access,Polygon Client Terms - Finance,polygon_client.model_polygon_client_terms,polygon_base.group_polygon_finance,1,0,0,0
+polygon_client_terms.tech_access,Polygon Client Terms - Tech,polygon_client.model_polygon_client_terms,polygon_base.group_polygon_tech,1,0,0,0
+polygon_client_terms.management_access,Polygon Client Terms - Management,polygon_client.model_polygon_client_terms,polygon_base.group_polygon_management,1,0,0,0
+polygon_client_terms.super_admin,Polygon Client Terms - Super Admin,polygon_client.model_polygon_client_terms,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_client_products.sales_access,Polygon Client Products - Sales,polygon_client.model_polygon_client_products,polygon_base.group_polygon_sales,1,1,1,0
+polygon_client_products.ops_manager_access,Polygon Client Products - Ops Manager,polygon_client.model_polygon_client_products,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_client_products.finance_access,Polygon Client Products - Finance,polygon_client.model_polygon_client_products,polygon_base.group_polygon_finance,1,0,0,0
+polygon_client_products.tech_access,Polygon Client Products - Tech,polygon_client.model_polygon_client_products,polygon_base.group_polygon_tech,1,0,0,0
+polygon_client_products.management_access,Polygon Client Products - Management,polygon_client.model_polygon_client_products,polygon_base.group_polygon_management,1,0,0,0
+polygon_client_products.super_admin,Polygon Client Products - Super Admin,polygon_client.model_polygon_client_products,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_client_contracts.sales_access,Polygon Client Contracts - Sales,polygon_client.model_polygon_client_contracts,polygon_base.group_polygon_sales,1,1,1,0
+polygon_client_contracts.ops_manager_access,Polygon Client Contracts - Ops Manager,polygon_client.model_polygon_client_contracts,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_client_contracts.finance_access,Polygon Client Contracts - Finance,polygon_client.model_polygon_client_contracts,polygon_base.group_polygon_finance,1,0,0,0
+polygon_client_contracts.tech_access,Polygon Client Contracts - Tech,polygon_client.model_polygon_client_contracts,polygon_base.group_polygon_tech,1,0,0,0
+polygon_client_contracts.management_access,Polygon Client Contracts - Management,polygon_client.model_polygon_client_contracts,polygon_base.group_polygon_management,1,0,0,0
+polygon_client_contracts.super_admin,Polygon Client Contracts - Super Admin,polygon_client.model_polygon_client_contracts,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_client_contracts_line.sales_access,Polygon Client Contracts Line - Sales,polygon_client.model_polygon_client_contracts_line,polygon_base.group_polygon_sales,1,1,1,0
+polygon_client_contracts_line.ops_manager_access,Polygon Client Contracts Line - Ops Manager,polygon_client.model_polygon_client_contracts_line,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_client_contracts_line.finance_access,Polygon Client Contracts Line - Finance,polygon_client.model_polygon_client_contracts_line,polygon_base.group_polygon_finance,1,0,0,0
+polygon_client_contracts_line.tech_access,Polygon Client Contracts Line - Tech,polygon_client.model_polygon_client_contracts_line,polygon_base.group_polygon_tech,1,0,0,0
+polygon_client_contracts_line.management_access,Polygon Client Contracts Line - Management,polygon_client.model_polygon_client_contracts_line,polygon_base.group_polygon_management,1,0,0,0
+polygon_client_contracts_line.super_admin,Polygon Client Contracts Line - Super Admin,polygon_client.model_polygon_client_contracts_line,polygon_base.group_polygon_super_admin,1,1,1,1

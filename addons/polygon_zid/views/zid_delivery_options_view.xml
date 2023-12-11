@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Delivery Options Form View -->
+    <record id="zid_delivery_options_form_view" model="ir.ui.view">
+        <field name="name">zid.delivery_options_form_view</field>
+        <field name="model">zid.delivery.options</field>
+        <field name="arch" type="xml">
+            <form string="Zid Delivery Options">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="zid_delivery_option_id"/>
+                        </group>
+                        <group>
+                            <field name="zid_instance_id"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Cities" name="cities_page">
+                                <field name="city_ids" nolabel="1">
+                                    <tree>
+                                        <field name="zid_country_master"/>
+                                        <field name="odoo_country"/>
+                                        <field name="zid_state_master"/>
+                                        <field name="odoo_state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Delivery Options Tree View -->
+    <record id="zid_delivery_options_tree_view" model="ir.ui.view">
+        <field name="name">zid.zid_delivery_options_tree_view</field>
+        <field name="model">zid.delivery.options</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Delivery Options">
+                <field name="name"/>
+                <field name="zid_delivery_option_id"/>
+                <field name="zid_instance_id"/>
+                <field name="city_ids"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--- Action Zid Delivery Options -->
+    <record id="action_zid_delivery_options" model="ir.actions.act_window">
+        <field name="name">Zid Delivery Options</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.delivery.options</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

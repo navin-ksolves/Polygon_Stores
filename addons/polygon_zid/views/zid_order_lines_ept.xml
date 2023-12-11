@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Order Lines EPT Form View -->
+    <record id="zid_order_lines_ept_form" model="ir.ui.view">
+        <field name="name">zid.order.lines.ept.form</field>
+        <field name="model">zid.order.lines.ept</field>
+        <field name="arch" type="xml">
+            <form string="Zid Order Lines EPT">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="order_id"/>
+                            <field name="so_line_id"/>
+                            <field name="product_id"/>
+                        </group> <group>
+                        <field name="name"/>
+                        <field name="order_id"/>
+                        <field name="so_line_id"/>
+                        <field name="product_id"/>
+                    </group>
+                        <group>
+                            <field name="item_id"/>
+                            <field name="quantity"/>
+                            <field name="price"/>
+                        </group>
+                    </group>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Order Lines EPT Tree View -->
+    <record id="zid_order_lines_ept_tree_view" model="ir.ui.view">
+        <field name="name">zid.order.lines.ept.tree</field>
+        <field name="model">zid.order.lines.ept</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Order Lines EPT">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="order_id"/>
+                <field name="so_line_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Order Lines EPT-->
+    <record id="zid_order_lines_ept_search_view" model="ir.ui.view">
+        <field name="name">zid.order.lines.ept.search</field>
+        <field name="model">zid.order.lines.ept</field>
+        <field name="arch" type="xml">
+            <search string="Zid Order Lines EPT">
+                <field name="name"/>
+                <field name="order_id"/>
+                <field name="so_line_id"/>
+                <field name="product_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Order Lines EPT -->
+    <record id="action_zid_order_lines_ept" model="ir.actions.act_window">
+        <field name="name">Zid Order Lines EPT</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.order.lines.ept</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

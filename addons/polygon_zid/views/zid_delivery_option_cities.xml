@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Delivery Option Cities Form View -->
+    <record id="zid_delivery_option_cities_form_view" model="ir.ui.view">
+        <field name="name">zid.delivery_options_cities_form_view</field>
+        <field name="model">zid.delivery.options.cities</field>
+        <field name="arch" type="xml">
+            <form string="Zid Delivery Option Cities">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="zid_country_master"/>
+                            <field name="zid_state_master"/>
+                            <field name="zid_instance_id"/>
+                        </group>
+                        <group>
+                            <field name="odoo_country"/>
+                            <field name="odoo_state"/>
+                            <field name="zid_delivery_option_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Delivery Option Cities Tree View -->
+    <record id="zid_delivery_option_cities_tree_view" model="ir.ui.view">
+        <field name="name">zid.zid_delivery_options_cities_tree_view</field>
+        <field name="model">zid.delivery.options.cities</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery Option Cities">
+                <field name="zid_state_master"/>
+                <field name="odoo_state"/>
+                <field name="zid_country_master"/>
+                <field name="odoo_country"/>
+                <field name="zid_instance_id"/>
+                <field name="zid_delivery_option_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--- Action Delivery Option Cities -->
+    <record id="action_zid_delivery_option_cities" model="ir.actions.act_window">
+        <field name="name">Zid Delivery Option Cities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.delivery.options.cities</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

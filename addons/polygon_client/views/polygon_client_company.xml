@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="polygon_client_company_form" model="ir.ui.view">
+        <field name="name">polygon.client.company.form</field>
+        <field name="model">polygon.client.company</field>
+        <field name="arch" type="xml">
+                <form string="Client Company">
+                        <sheet>
+                                <group>
+                                        <field name="name"/>
+                                        <field name="vat"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                        <field name="website"/>
+                                        <field name="street"/>
+                                        <field name="street2"/>
+                                        <field name="state_id" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id}"/>
+                                        <field name="country_id" placeholder="Country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                        <field name="active"/>
+                                </group>
+                        </sheet>
+                        <div class="oe_chatter">
+                                <field name="message_follower_ids"/>
+                                <field name="message_ids"/>
+                        </div>
+                </form>
+        </field>
+    </record>
+    <record id="polygon_client_company_tree" model="ir.ui.view">
+        <field name="name">polygon.client.company.tree</field>
+        <field name="model">polygon.client.company</field>
+        <field name="arch" type="xml">
+                <tree string="Client Company" decoration-success="active == True" decoration-warning="active == False">
+                    <field name="name" readonly="1"/>
+                    <field name="vat" readonly="1" optional="show"/>
+                    <field name="phone" readonly="1" optional="show"/>
+                    <field name="email" readonly="1" optional="show"/>
+                    <field name="website" readonly="1" optional="show"/>
+                    <field name="street" readonly="1" optional="hide"/>
+                    <field name="street2"  readonly="1" optional="hide"/>
+                    <field name="state_id" readonly="1" optional="show" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id}"/>
+                    <field name="country_id" readonly="1" optional="show" placeholder="Country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                    <field name="active" />
+                </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid App Form View -->
+    <record id="zid_app_form_view" model="ir.ui.view">
+        <field name="name">zid.app.form</field>
+        <field name="model">zid.app</field>
+        <field name="arch" type="xml">
+            <form string="Zid App">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="app_name"/>
+                            <field name="zid_client_id"/>
+                            <field name="zid_client_secret"/>
+                            <field name="zid_oauth_endpoint"/>
+                        </group>
+                        <group>
+                            <field name="redirect_url"/>
+                            <field name="callback_url"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Countries" name="app_contries_page">
+                                <field name="country_ids" nolabel="1">
+                                    <tree>
+<!--                                        <field name="zid_country_id"/>-->
+                                        <field name="name"/>
+                                        <field name="odoo_country"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid App Tree View -->
+    <record id="zid_app_tree_view" model="ir.ui.view">
+        <field name="name">zid.app.tree</field>
+        <field name="model">zid.app</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid App">
+                <field name="app_name"/>
+                <field name="zid_client_id"/>
+                <field name="zid_client_secret"/>
+                <field name="zid_oauth_endpoint"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid App-->
+    <record id="zid_app_search_view" model="ir.ui.view">
+        <field name="name">zid.app.search</field>
+        <field name="model">zid.app</field>
+        <field name="arch" type="xml">
+            <search string="Zid App">
+                <field name="app_name"/>
+                <field name="zid_client_id"/>
+                <field name="zid_client_secret"/>
+                <field name="zid_oauth_endpoint"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid App -->
+    <record id="action_zid_app" model="ir.actions.act_window">
+        <field name="name">Zid App</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.app</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

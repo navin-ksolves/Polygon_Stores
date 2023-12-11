@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Product Category Form View -->
+    <record id="zid_product_category_form_view" model="ir.ui.view">
+        <field name="name">zid.product.category.form</field>
+        <field name="model">zid.product.category</field>
+        <field name="arch" type="xml">
+            <form string="Zid Product Category Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="zid_category_id"/>
+                            <field name="Zid_product_category_url"/>
+                            <field name="parent_category_id"/>
+                            <field name="category_id"/>
+                        </group>
+                        <group>
+                            <field name="owner_id"/>
+<!--                            <field name="zid_instance_id"/>-->
+<!--                            <field name="active"/>-->
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Product Category Tree View -->
+    <record id="zid_product_category_tree_view" model="ir.ui.view">
+        <field name="name">zid.product.category.tree</field>
+        <field name="model">zid.product.category</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Product Category">
+                <field name="name"/>
+                <field name="zid_category_id"/>
+                <field name="Zid_product_category_url"/>
+                <field name="parent_category_id"/>
+                <field name="category_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Product Category -->
+    <record id="zid_product_category_search_view" model="ir.ui.view">
+        <field name="name">zid.product.category.search</field>
+        <field name="model">zid.product.category</field>
+        <field name="arch" type="xml">
+            <search string="Zid Product Category">
+                <field name="name"/>
+                <field name="zid_category_id"/>
+                <field name="Zid_product_category_url"/>
+                <field name="parent_category_id"/>
+                <field name="category_id"/>
+                <separator/>
+<!--                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>-->
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Product Category -->
+    <record id="action_zid_product_category" model="ir.actions.act_window">
+        <field name="name">Zid Product Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.product.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="zid_scheduler_order_line_form" model="ir.ui.view">
+        <field name="name">Zid Scheduler Order Line Form</field>
+        <field name="model">zid.scheduler.order.line</field>
+        <field name="arch" type="xml">
+            <form string="Scheduler Order Line ">
+                <sheet>
+                    <group name="Scheduler Order Line">
+                        <group>
+                            <field name="status"/>
+                            <field name="order_id"/>
+
+                        </group>
+                        <group>
+                            <field name="locations"/>
+                            <field name="header"/>
+                            <field name="lines"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Json Data">
+                            <field name="data"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="zid_scheduler_order_line_tree" model="ir.ui.view">
+        <field name="name">Zid Scheduler Order Line Tree</field>
+        <field name="model">zid.scheduler.order.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree sample="1">
+                <field name="status"/>
+                <field name="data"/>
+                <field name="order_id"/>
+                <field name="locations"/>
+                <field name="header"/>
+                <field name="lines"/>
+
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_zid_scheduler_order_line" model="ir.actions.act_window">
+        <field name="name">Scheduler Order Line</field>
+        <field name="res_model">zid.scheduler.order.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

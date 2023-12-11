@@ -1,0 +1,74 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+cengine_customer_ept.sales_access,Cengine Customer EPT - Sales,polygon_cengine.model_cengine_customer_ept,polygon_base.group_polygon_sales,1,1,1,0
+cengine_customer_ept.ops_manager_access,Cengine Customer EPT - Ops Manager,polygon_cengine.model_cengine_customer_ept,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_customer_ept.finance_access,Cengine Customer EPT - Finance,polygon_cengine.model_cengine_customer_ept,polygon_base.group_polygon_finance,1,0,0,0
+cengine_customer_ept.tech_access,Cengine Customer EPT - Tech,polygon_cengine.model_cengine_customer_ept,polygon_base.group_polygon_tech,1,1,0,0
+cengine_customer_ept.management_access,Cengine Customer EPT - Management,polygon_cengine.model_cengine_customer_ept,polygon_base.group_polygon_management,1,0,0,0
+cengine_customer_ept.super_admin,Cengine Customer EPT - Super Admin,polygon_cengine.model_cengine_customer_ept,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_instance_ept.client_access,Cengine Instance EPT - Client Access,polygon_cengine.model_cengine_instance_ept,polygon_base.group_client_user,1,1,1,0
+cengine_instance_ept.sales_access,Cengine Instance EPT - Sales,polygon_cengine.model_cengine_instance_ept,polygon_base.group_polygon_sales,1,1,1,0
+cengine_instance_ept.ops_manager_access,Cengine Instance EPT - Ops Manager,polygon_cengine.model_cengine_instance_ept,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_instance_ept.finance_access,Cengine Instance EPT - Finance,polygon_cengine.model_cengine_instance_ept,polygon_base.group_polygon_finance,1,0,0,0
+cengine_instance_ept.tech_access,Cengine Instance EPT - Tech,polygon_cengine.model_cengine_instance_ept,polygon_base.group_polygon_tech,1,1,0,0
+cengine_instance_ept.management_access,Cengine Instance EPT - Management,polygon_cengine.model_cengine_instance_ept,polygon_base.group_polygon_management,1,0,0,0
+cengine_instance_ept.super_admin,Cengine Instance EPT - Super Admin,polygon_cengine.model_cengine_instance_ept,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_log_book.sales_access,Cengine Log Book - Sales,polygon_cengine.model_cengine_log_book,polygon_base.group_polygon_sales,1,1,1,0
+cengine_log_book.ops_manager_access,Cengine Log Book - Ops Manager,polygon_cengine.model_cengine_log_book,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_log_book.finance_access,Cengine Log Book - Finance,polygon_cengine.model_cengine_log_book,polygon_base.group_polygon_finance,1,0,0,0
+cengine_log_book.tech_access,Cengine Log Book - Tech,polygon_cengine.model_cengine_log_book,polygon_base.group_polygon_tech,1,1,0,0
+cengine_log_book.management_access,Cengine Log Book - Management,polygon_cengine.model_cengine_log_book,polygon_base.group_polygon_management,1,0,0,0
+cengine_log_book.super_admin,Cengine Log Book - Super Admin,polygon_cengine.model_cengine_log_book,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_order_lines_ept.client_access,Conversion Engine Order Lines - Client Access,polygon_cengine.model_cengine_order_lines_ept,polygon_base.group_client_user,1,1,1,0
+cengine_order_lines_ept.sales_access,Conversion Engine Order Lines - Sales,polygon_cengine.model_cengine_order_lines_ept,polygon_base.group_polygon_sales,1,1,1,0
+cengine_order_lines_ept.ops_manager_access,Conversion Engine Order Lines - Ops Manager,polygon_cengine.model_cengine_order_lines_ept,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_order_lines_ept.finance_access,Conversion Engine Order Lines - Finance,polygon_cengine.model_cengine_order_lines_ept,polygon_base.group_polygon_finance,1,0,0,0
+cengine_order_lines_ept.tech_access,Conversion Engine Order Lines - Tech,polygon_cengine.model_cengine_order_lines_ept,polygon_base.group_polygon_tech,1,1,0,0
+cengine_order_lines_ept.management_access,Conversion Engine Order Lines - Management,polygon_cengine.model_cengine_order_lines_ept,polygon_base.group_polygon_management,1,0,0,0
+cengine_order_lines_ept.super_admin,Conversion Engine Order Lines - Super Admin,polygon_cengine.model_cengine_order_lines_ept,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_customer_ept.client_access,Conversion Engine Customer - Client Access,polygon_cengine.model_cengine_customer_ept,polygon_base.group_client_user,1,1,1,0
+cengine_customer_locations.client_access,Conversion Engine Customer Locations - Client Access,polygon_cengine.model_cengine_customer_locations,polygon_base.group_client_user,1,1,1,0
+cengine_order_ept.client_access,Conversion Engine Order - Client Access,polygon_cengine.model_cengine_order_ept,polygon_base.group_client_user,1,1,1,0
+cengine_order_ept.sales_access,Conversion Engine Order - Sales,polygon_cengine.model_cengine_order_ept,polygon_base.group_polygon_sales,1,1,1,0
+cengine_order_ept.ops_manager_access,Conversion Engine Order - Ops Manager,polygon_cengine.model_cengine_order_ept,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_order_ept.finance_access,Conversion Engine Order - Finance,polygon_cengine.model_cengine_order_ept,polygon_base.group_polygon_finance,1,0,0,0
+cengine_order_ept.tech_access,Conversion Engine Order - Tech,polygon_cengine.model_cengine_order_ept,polygon_base.group_polygon_tech,1,1,0,0
+cengine_order_ept.management_access,Conversion Engine Order - Management,polygon_cengine.model_cengine_order_ept,polygon_base.group_polygon_management,1,0,0,0
+cengine_order_ept.super_admin,Conversion Engine Order - Super Admin,polygon_cengine.model_cengine_order_ept,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_product_template.client_access,Cengine Product Template - Client Access,polygon_cengine.model_cengine_product_template,polygon_base.group_client_user,1,1,1,0
+cengine_product_template.sales_access,Cengine Product Template - Sales,polygon_cengine.model_cengine_product_template,polygon_base.group_polygon_sales,1,1,1,0
+cengine_product_template.ops_manager_access,Cengine Product Template - Ops Manager,polygon_cengine.model_cengine_product_template,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_product_template.finance_access,Cengine Product Template - Finance,polygon_cengine.model_cengine_product_template,polygon_base.group_polygon_finance,1,0,0,0
+cengine_product_template.tech_access,Cengine Product Template - Tech,polygon_cengine.model_cengine_product_template,polygon_base.group_polygon_tech,1,1,0,0
+cengine_product_template.management_access,Cengine Product Template - Management,polygon_cengine.model_cengine_product_template,polygon_base.group_polygon_management,1,0,0,0
+cengine_product_template.super_admin,Cengine Product Template - Super Admin,polygon_cengine.model_cengine_product_template,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_webhook_ept.client_access,Cengine Webhook EPT - Client Access,polygon_cengine.model_cengine_webhook_ept,polygon_base.group_client_user,1,1,1,0
+cengine_webhook_ept.sales_access,Cengine Webhook EPT - Sales,polygon_cengine.model_cengine_webhook_ept,polygon_base.group_polygon_sales,1,1,1,0
+cengine_webhook_ept.ops_manager_access,Cengine Webhook EPT - Ops Manager,polygon_cengine.model_cengine_webhook_ept,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_webhook_ept.finance_access,Cengine Webhook EPT - Finance,polygon_cengine.model_cengine_webhook_ept,polygon_base.group_polygon_finance,1,0,0,0
+cengine_webhook_ept.tech_access,Cengine Webhook EPT - Tech,polygon_cengine.model_cengine_webhook_ept,polygon_base.group_polygon_tech,1,1,1,1
+cengine_webhook_ept.management_access,Cengine Webhook EPT - Management,polygon_cengine.model_cengine_webhook_ept,polygon_base.group_polygon_management,1,0,0,0
+cengine_webhook_ept.super_admin,Cengine Webhook EPT - Super Admin,polygon_cengine.model_cengine_webhook_ept,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_scheduler_ept.client_access,Cengine Scheduler EPT - Client Access,polygon_cengine.model_cengine_scheduler_ept,polygon_base.group_client_user,1,1,1,0
+cengine_scheduler_ept.sales_access,Cengine Scheduler EPT - Sales,polygon_cengine.model_cengine_scheduler_ept,polygon_base.group_polygon_sales,1,1,1,0
+cengine_scheduler_ept.ops_manager_access,Cengine Scheduler EPT - Ops Manager,polygon_cengine.model_cengine_scheduler_ept,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_scheduler_ept.finance_access,Cengine Scheduler EPT - Finance,polygon_cengine.model_cengine_scheduler_ept,polygon_base.group_polygon_finance,1,0,0,0
+cengine_scheduler_ept.tech_access,Cengine Scheduler EPT - Tech,polygon_cengine.model_cengine_scheduler_ept,polygon_base.group_polygon_tech,1,1,0,0
+cengine_scheduler_ept.management_access,Cengine Scheduler EPT - Management,polygon_cengine.model_cengine_scheduler_ept,polygon_base.group_polygon_management,1,0,0,0
+cengine_scheduler_ept.super_admin,Cengine Scheduler EPT - Super Admin,polygon_cengine.model_cengine_scheduler_ept,polygon_base.group_polygon_super_admin,1,1,1,1
+cengine_scheduler_order_ept.client_access,Cengine SchedulerOrder EPT - Client Access,polygon_cengine.model_cengine_scheduler_order_ept,polygon_base.group_client_user,1,1,1,0
+cengine_scheduler_order_ept.sales_access,Cengine SchedulerOrder EPT - Sales,polygon_cengine.model_cengine_scheduler_order_ept,polygon_base.group_polygon_sales,1,1,1,0
+cengine_scheduler_order_ept.ops_manager_access,Cengine SchedulerOrder EPT - Ops Manager,polygon_cengine.model_cengine_scheduler_order_ept,polygon_base.group_polygon_ops_manager,1,0,0,0
+cengine_scheduler_order_ept.finance_access,Cengine SchedulerOrder EPT - Finance,polygon_cengine.model_cengine_scheduler_order_ept,polygon_base.group_polygon_finance,1,0,0,0
+cengine_scheduler_order_ept.tech_access,Cengine SchedulerOrder EPT - Tech,polygon_cengine.model_cengine_scheduler_order_ept,polygon_base.group_polygon_tech,1,1,0,0
+cengine_scheduler_order_ept.management_access,Cengine SchedulerOrder EPT - Management,polygon_cengine.model_cengine_scheduler_order_ept,polygon_base.group_polygon_management,1,0,0,0
+cengine_scheduler_order_ept.super_admin,Cengine SchedulerOrder EPT - Super Admin,polygon_cengine.model_cengine_scheduler_order_ept,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_cengine.access_cengine_log_lines,access_cengine_log_lines,polygon_cengine.model_cengine_log_lines,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_product_template_image,access_cengine_product_template_image,polygon_cengine.model_cengine_product_template_image,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_product_category,access_cengine_product_category,polygon_cengine.model_cengine_product_category,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_product_options,access_cengine_product_options,polygon_cengine.model_cengine_product_options,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_product_option_values,access_cengine_product_option_values,polygon_cengine.model_cengine_product_option_values,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_product_variants,access_cengine_product_variants,polygon_cengine.model_cengine_product_variants,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_customer_locations,access_cengine_customer_locations,polygon_cengine.model_cengine_customer_locations,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_order_lines_ept,access_cengine_order_lines_ept,polygon_cengine.model_cengine_order_lines_ept,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_scheduler_product_ept,access_cengine_scheduler_product_ept,polygon_cengine.model_cengine_scheduler_product_ept,base.group_user,1,1,1,0
+polygon_cengine.access_cengine_scheduler_contacts_ept,access_cengine_scheduler_contacts_ept,polygon_cengine.model_cengine_scheduler_contacts_ept,base.group_user,1,1,1,0

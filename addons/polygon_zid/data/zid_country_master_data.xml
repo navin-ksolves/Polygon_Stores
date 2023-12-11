@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="zid.country.master" id="zid_country_are">
+            <field name="name">ARE</field>
+            <field name="zid_country_id">221</field>
+        </record>
+    </data>
+</odoo>

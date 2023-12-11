@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Form View-->
+    <record id="view_form_zid_currency" model="ir.ui.view">
+        <field name="name">zid.currency.form</field>
+        <field name="model">zid.currency.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="zid_id"/>
+                        <field name="odoo_currency"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--Tree View-->
+
+    <record id="view_tree_zid_currency" model="ir.ui.view">
+        <field name="name">zid.currency.tree</field>
+        <field name="model">zid.currency.master</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="zid_id"/>
+                <field name="odoo_currency"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- actions -->
+
+    <record id="action_zid_currency" model="ir.actions.act_window">
+        <field name="name">Zid Currency</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.currency.master</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

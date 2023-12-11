@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_warehouse_view_inherit123" model="ir.ui.view">
+        <field name="name">stock.warehouse.form</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="longitude"/>
+                <field name="latitude"/>
+                <field name="store_id_express"/>
+                <field name="store_id_planned"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="shift_slot_start" widget="float_time"/>
+                <field name="shift_slot_end" widget="float_time"/>
+                <field name="tz"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

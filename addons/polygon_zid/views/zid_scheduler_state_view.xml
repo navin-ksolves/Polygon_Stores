@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_zid_scheduler_form" model="ir.ui.view">
+        <field name="name">zid_scheduler_model.form</field>
+        <field name="model">zid.scheduler.state</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="scheduler_log_id"/>
+                        <field name="state_master_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Json Data">
+                            <field name="data"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_zid_scheduler_model_tree" model="ir.ui.view">
+        <field name="name">zid_scheduler_model.tree</field>
+        <field name="model">zid.scheduler.state</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="data"/>
+                <field name="scheduler_log_id"/>
+                <field name="state_master_id"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+    <!--Action-->
+    <record id="action_zid_scheduler_state" model="ir.actions.act_window">
+        <field name="name">Zid Scheduler State</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.scheduler.state</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid User Form View -->
+    <record id="zid_user_form_view" model="ir.ui.view">
+        <field name="name">zid.user.form</field>
+        <field name="model">zid.user</field>
+        <field name="arch" type="xml">
+            <form string="Zid User">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="zid_user_id"/>
+                            <field name="uuid"/>
+                        </group>
+                        <group>
+                            <field name="username"/>
+                            <field name="email"/>
+                            <field name="mobile"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid User Tree View -->
+    <record id="zid_user_tree_view" model="ir.ui.view">
+        <field name="name">zid.user.tree</field>
+        <field name="model">zid.user</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid User">
+                <field name="name"/>
+                <field name="zid_user_id"/>
+                <field name="uuid"/>
+                <field name="username"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid User-->
+    <record id="zid_user_search_view" model="ir.ui.view">
+        <field name="name">zid.user.search</field>
+        <field name="model">zid.user</field>
+        <field name="arch" type="xml">
+            <search string="Zid User">
+                <field name="name"/>
+                <field name="username"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid User -->
+    <record id="action_zid_user" model="ir.actions.act_window">
+        <field name="name">Zid User</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.user</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

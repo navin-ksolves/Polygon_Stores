@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- views/form_view-->
+    <record id="view_form_zid_scheduler_products_variants" model="ir.ui.view">
+        <field name="name">zid.scheduler.products.form</field>
+        <field name="model">zid.scheduler.products</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="scheduler_log_id"/>
+                            <field name="zid_product_id"/>
+                            <field name="product"/>
+                            <field name="category"/>
+                            <field name="attribute"/>
+                            <field name="images"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Json Data">
+                            <field name="data"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- views/tree_view -->
+    <record id="view_tree_zid_scheduler_products_variants" model="ir.ui.view">
+        <field name="name">zid.scheduler.products.tree</field>
+        <field name="model">zid.scheduler.products</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="scheduler_log_id"/>
+                <!--                <field name="data"/>-->
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- action -->
+    <record id="action_zid_scheduler_products_variants" model="ir.actions.act_window">
+        <field name="name">Product Scheduler</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.scheduler.products</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

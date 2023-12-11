@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Product Variants Images Form View -->
+    <record id="zid_product_variants_images_form_view" model="ir.ui.view">
+        <field name="name">zid.product.variants.images.form</field>
+        <field name="model">zid.product.variants.images</field>
+        <field name="arch" type="xml">
+            <form string="Zid Product Variants Images">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="url"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Product Variants Images Tree View -->
+    <record id="zid_product_variants_images_tree_view" model="ir.ui.view">
+        <field name="name">zid.product.variants.images.tree</field>
+        <field name="model">zid.product.variants.images</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Product Variants Images">
+                <field name="name"/>
+                <field name="url"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Product Variants Images -->
+    <record id="zid_product_variants_images_search_view" model="ir.ui.view">
+        <field name="name">zid.product.variants.images.search</field>
+        <field name="model">zid.product.variants.images</field>
+        <field name="arch" type="xml">
+            <search string="Zid Product Variants Images">
+                <field name="name"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Product Variants Images -->
+    <record id="action_zid_product_variants_images" model="ir.actions.act_window">
+        <field name="name">Zid Product Variants Images</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.product.variants.images</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

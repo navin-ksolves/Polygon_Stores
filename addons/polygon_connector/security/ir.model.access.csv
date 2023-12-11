@@ -1,0 +1,25 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+polygon_connector_clients.sales_access,Polygon Connector Clients - Sales,polygon_connector.model_polygon_connector_clients,polygon_base.group_polygon_sales,1,1,1,0
+polygon_connector_clients.ops_manager_access,Polygon Connector Clients - Ops Manager,polygon_connector.model_polygon_connector_clients,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_connector_clients.finance_access,Polygon Connector Clients - Finance,polygon_connector.model_polygon_connector_clients,polygon_base.group_polygon_finance,1,0,0,0
+polygon_connector_clients.tech_access,Polygon Connector Clients - Tech,polygon_connector.model_polygon_connector_clients,polygon_base.group_polygon_tech,1,0,0,0
+polygon_connector_clients.management_access,Polygon Connector Clients - Management,polygon_connector.model_polygon_connector_clients,polygon_base.group_polygon_management,1,0,0,0
+polygon_connector_clients.super_admin,Polygon Connector Clients - Super Admin,polygon_connector.model_polygon_connector_clients,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_connector_requests.sales_access,Polygon Connector Requests - Sales,polygon_connector.model_polygon_connector_requests,polygon_base.group_polygon_sales,1,1,1,0
+polygon_connector_requests.ops_manager_access,Polygon Connector Requests - Ops Manager,polygon_connector.model_polygon_connector_requests,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_connector_requests.finance_access,Polygon Connector Requests - Finance,polygon_connector.model_polygon_connector_requests,polygon_base.group_polygon_finance,1,0,0,0
+polygon_connector_requests.tech_access,Polygon Connector Requests - Tech,polygon_connector.model_polygon_connector_requests,polygon_base.group_polygon_tech,1,1,0,0
+polygon_connector_requests.management_access,Polygon Connector Requests - Management,polygon_connector.model_polygon_connector_requests,polygon_base.group_polygon_management,1,0,0,0
+polygon_connector_requests.super_admin,Polygon Connector Requests - Super Admin,polygon_connector.model_polygon_connector_requests,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_connector_types.sales_access,Polygon Connector Types - Sales,polygon_connector.model_polygon_connector_types,polygon_base.group_polygon_sales,1,1,1,0
+polygon_connector_types.ops_manager_access,Polygon Connector Types - Ops Manager,polygon_connector.model_polygon_connector_types,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_connector_types.finance_access,Polygon Connector Types - Finance,polygon_connector.model_polygon_connector_types,polygon_base.group_polygon_finance,1,0,0,0
+polygon_connector_types.tech_access,Polygon Connector Types - Tech,polygon_connector.model_polygon_connector_types,polygon_base.group_polygon_tech,1,0,0,0
+polygon_connector_types.management_access,Polygon Connector Types - Management,polygon_connector.model_polygon_connector_types,polygon_base.group_polygon_management,1,0,0,0
+polygon_connector_types.super_admin,Polygon Connector Types - Super Admin,polygon_connector.model_polygon_connector_types,polygon_base.group_polygon_super_admin,1,1,1,1
+polygon_instance.sales_access,Polygon Connector Instance - Sales,polygon_connector.model_polygon_instance,polygon_base.group_polygon_sales,1,1,1,0
+polygon_instance.ops_manager_access,Polygon Connector Instance - Ops Manager,polygon_connector.model_polygon_instance,polygon_base.group_polygon_ops_manager,1,0,0,0
+polygon_instance.finance_access,Polygon Connector Instance - Finance,polygon_connector.model_polygon_instance,polygon_base.group_polygon_finance,1,0,0,0
+polygon_instance.tech_access,Polygon Connector Instance - Tech,polygon_connector.model_polygon_instance,polygon_base.group_polygon_tech,1,0,0,0
+polygon_instance.management_access,Polygon Connector Instance - Management,polygon_connector.model_polygon_instance,polygon_base.group_polygon_management,1,0,0,0
+polygon_instance.super_admin,Polygon Connector Instance - Super Admin,polygon_connector.model_polygon_instance,polygon_base.group_polygon_super_admin,1,1,1,1

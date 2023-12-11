@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+# See LICENSE file for full copyright and licensing details.
+
+from odoo import models, fields, api
+
+
+class SaleAutoWorkflowConfiguration(models.Model):
+    _name = "zid.sale.auto.workflow.configuration.ept"
+    _description = 'Zid Sale auto workflow configuration'
+
+    @api.model
+    def _default_payment_term(self):
+        payment_term = self.env.ref("account.account_payment_term_immediate")
+        return payment_term.id if payment_term else False
+
+    financial_status = fields.Selection([('pending', 'The finances are pending'),
+                                         ('authorized', 'The finances have been authorized'),
+                                         ('partially_paid', 'The finances have been partially paid'),
+                                         ('paid', 'The finances have been paid'),
+                                         ('partially_refunded', 'The finances have been partially refunded'),
+                                         ('refunded', 'The finances have been refunded'),
+                                         ('voided', 'The finances have been voided')
+                                         ], default="paid")
+    # auto_workflow_id = fields.Many2one("sale.workflow.process.ept", "Auto Workflow")
+    payment_gateway_id = fields.Many2one("zid.payment.gateway.ept", "Payment Gateway", ondelete="restrict")
+    payment_gateway_id = fields.Integer(string="Payment Gateway")
+    payment_term_id = fields.Integer(string="Payment Term")
+    auto_workflow_id = fields.Integer(string="Auto Workflow")
+    payment_term_id = fields.Many2one('account.payment.term', string='Payment Term', default=_default_payment_term)
+    zid_instance_id = fields.Integer(string="Instance")
+    active = fields.Boolean("Active", default=True)
+    #
+    # _sql_constraints = [('_workflow_unique_constraint',
+    #                      'unique(financial_status,zid_instance_id,payment_gateway_id)',
+    #                      "Financial status must be unique in the list")]
+
+    # def create_financial_status(self, instance, financial_status):
+    #
+    #     payment_methods = self.env['zid.payment.gateway.ept'].search([('zid_instance_id', '=', instance.id)])
+    #     auto_workflow_record = self.env.ref("common_connector_library.automatic_validation_ept")
+    #
+    #     for payment_method in payment_methods:
+    #         domain = [('zid_instance_id', '=', instance.id),
+    #                   ('payment_gateway_id', '=', payment_method.id),
+    #                   ('financial_status', '=', financial_status)]
+    #
+    #         existing_financial_status = self.search(domain).ids
+    #         if existing_financial_status:
+    #             continue
+    #
+    #         vals = {
+    #             'zid_instance_id': instance.id,
+    #             # 'auto_workflow_id': auto_workflow_record.id,
+    #             'payment_gateway_id': payment_method.id,
+    #             'financial_status': financial_status
+    #         }
+    #         self.create(vals)
+    #     return True

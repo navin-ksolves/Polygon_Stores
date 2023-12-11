@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Product Template Form View -->
+    <record id="zid_product_template_form_view" model="ir.ui.view">
+        <field name="name">zid.product.template.form</field>
+        <field name="model">zid.product.template</field>
+        <field name="arch" type="xml">
+            <form string="Zid Product Template Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="owner_id"/>
+                            <field name="instance_id"/>
+                            <field name="zid_product_categ_id"/>
+<!--                            <field name="zid_product_template_id"/>-->
+                            <field name="primary_product_id"/>
+<!--                            <field name="zid_product_template_url"/>-->
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+<!--                            <field name="zid_product_template_type"/>-->
+<!--                            <field name="zid_product_template_status"/>-->
+                            <field name="has_variants"/>
+                            <field name="default_shipping"/>
+                            <field name="default_discount"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Product Template Tree View -->
+    <record id="zid_product_template_tree_view" model="ir.ui.view">
+        <field name="name">zid.product.template.tree</field>
+        <field name="model">zid.product.template</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Product Template">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="owner_id"/>
+                <field name="instance_id"/>
+                <field name="zid_product_categ_id"/>
+<!--                <field name="zid_product_template_id"/>-->
+                <field name="primary_product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Product Template -->
+    <record id="zid_product_template_search_view" model="ir.ui.view">
+        <field name="name">zid.product.template.search</field>
+        <field name="model">zid.product.template</field>
+        <field name="arch" type="xml">
+            <search string="Zid Product Template">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="owner_id"/>
+                <field name="instance_id"/>
+                <field name="zid_product_categ_id"/>
+<!--                <field name="zid_product_template_id"/>-->
+                <field name="primary_product_id"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Instance" name="group_by_instance_id"
+                            context="{'group_by': 'instance_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Product Template -->
+    <record id="action_zid_product_template" model="ir.actions.act_window">
+        <field name="name">Zid Product Template</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.product.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

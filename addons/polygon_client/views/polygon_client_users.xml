@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="polygon_client_users_form" model="ir.ui.view">
+        <field name="name">polygon.client.users.form</field>
+        <field name="model">polygon.client.users</field>
+        <field name="arch" type="xml">
+                <form string="Client Users">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="client_id"/>
+                            <field name="is_primary"/>
+                            <field name="user_type"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="polygon_client_user_search" model="ir.ui.view">
+        <field name="name">polygon.client.user.search</field>
+        <field name="model">polygon.client.users</field>
+        <field name="arch" type="xml">
+            <search string="client_user_search">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="is_primary"/>
+                    <field name="client_id"/>
+
+                    <filter string="Primary" name="primary" domain="[('is_primary','=',True)]"/>
+                    <filter string="Non-Primary" name="non_primary" domain="[('is_primary','=',False)]"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Client" name="group_by_client" context="{'group_by': 'client_id'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="polygon_client_user_tree" model="ir.ui.view">
+        <field name="name">polygon.client.user.tree</field>
+        <field name="model">polygon.client.users</field>
+        <field name="arch" type="xml">
+            <tree string="Client Users">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="is_primary"/>
+                <field name="user_type"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

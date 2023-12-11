@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Polygon Zid Menu -->
+    <menuitem id="menu_polygon_zid" name="Polygon Zid"
+              parent="polygon_base.polygon_root_menu" sequence="50"/>
+
+    <!--    Sub- Menu for schedulers-->
+    <menuitem id="menu_zid_schedulers" name="Scheduler Logs"
+              parent="menu_polygon_zid" sequence="50"/>
+
+    <!--    Sub- Menu for configurations-->
+    <menuitem id="menu_zid_schedulers_configurations" name="Configurations"
+              parent="menu_polygon_zid" sequence="50"/>
+
+    <!-- Zid Instant EPT Menu -->
+    <menuitem id="menu_zid_instant_ept" name="Zid Instant EPT"
+              action="polygon_zid.action_zid_instance_ept"
+              parent="polygon_zid.menu_zid_schedulers_configurations" sequence="1"/>
+
+  <!-- Zid Payment Gateway Menu -->
+    <menuitem id="menu_zid_payment_gateway_ept" name="Zid Payment Gateway"
+              action="polygon_zid.action_zid_payment_gateway"
+              parent="polygon_zid.menu_polygon_zid" sequence="1"/>
+
+     <!-- Zid Financial Status Menu -->
+    <menuitem id="menu_zid_financial_status" name="Zid Financial Status"
+              action="polygon_zid.zid_act_sale_workflow_config_instance_form"
+              parent="polygon_zid.menu_polygon_zid" sequence="1"/>
+
+
+    <!-- Zid Scheduler Order Menu -->
+    <menuitem id="menu_zid_scheduler_order" name="Zid Scheduler Order"
+              action="polygon_zid.action_zid_scheduler_order"
+              parent="polygon_zid.menu_zid_schedulers" sequence="1"/>
+
+    <!-- Zid Scheduler Order Line Menu -->
+    <menuitem id="menu_zid_scheduler_order_line" name="Zid Scheduler Order Line"
+              action="polygon_zid.action_zid_scheduler_order_line"
+              parent="polygon_zid.menu_zid_schedulers" sequence="1"/>
+
+    <!-- Zid Customer EPT Menu -->
+    <menuitem id="menu_zid_customer_ept" name="Zid Customer EPT"
+              action="polygon_zid.action_zid_customer_ept"
+              parent="polygon_zid.menu_polygon_zid" sequence="2"/>
+
+    <!-- Zid Customer Locations Menu -->
+    <menuitem id="menu_zid_customer_locations" name="Zid Customer Locations"
+              action="polygon_zid.action_zid_customer_locations"
+              parent="polygon_zid.menu_polygon_zid" sequence="3"/>
+
+    <!--    Zid State Master Menu-->
+    <menuitem id="menu_zid_state_master" name="Zid State Master"
+              action="polygon_zid.action_zid_state_master"
+              parent="polygon_zid.menu_polygon_zid" sequence="3"/>
+
+    <!--    Zid Scheduler State Master Menu-->
+    <menuitem id="menu_zid_scheduler_state" name="Zid Scheduler State"
+              action="polygon_zid.action_zid_scheduler_state"
+              parent="polygon_zid.menu_zid_schedulers" sequence="3"/>
+
+    <!--    Zid Country Master Menu-->
+    <menuitem id="menu_zid_country_master" name="Zid Country Master"
+              action="polygon_zid.action_zid_country_master"
+              parent="polygon_zid.menu_polygon_zid" sequence="3"/>
+
+    <!--    &lt;!&ndash;    Zid Delivery Options Menu&ndash;&gt;-->
+    <!--    <menuitem id="menu_zid_delivery_options" name="Zid Delivery Options"-->
+    <!--              action="polygon_zid.action_zid_delivery_options"-->
+    <!--              parent="polygon_zid.menu_polygon_zid" sequence="3"/>-->
+
+    <!--     &lt;!&ndash;    Zid Delivery Option Cities Menu&ndash;&gt;-->
+    <!--    <menuitem id="menu_zid_delivery_option_cities" name="Zid Delivery Option Cities"-->
+    <!--              action="polygon_zid.action_zid_delivery_option_cities"-->
+    <!--              parent="polygon_zid.menu_polygon_zid" sequence="3"/>-->
+
+    <!-- Zid Product Category Menu -->
+    <menuitem id="menu_zid_product_category" name="Zid Product Category"
+              action="polygon_zid.action_zid_product_category"
+              parent="polygon_zid.menu_polygon_zid" sequence="4"/>
+
+    <!-- Zid Product Template Menu -->
+    <menuitem id="menu_zid_product_template" name="Zid Product Template"
+              action="polygon_zid.action_zid_product_template"
+              parent="polygon_zid.menu_polygon_zid" sequence="5"/>
+
+    <!-- Zid Product Attributes Menu -->
+    <menuitem id="menu_zid_product_attributes" name="Zid Product Attributes"
+              action="polygon_zid.action_zid_product_attributes"
+              parent="polygon_zid.menu_polygon_zid" sequence="6"/>
+
+    <!-- Zid Product Attributes Values Menu -->
+    <menuitem id="menu_zid_product_attributes_values" name="Zid Product Attributes Values"
+              action="polygon_zid.action_zid_product_attributes_values"
+              parent="polygon_zid.menu_polygon_zid" sequence="7"/>
+
+    <!-- Zid Product Variants Images Menu -->
+    <menuitem id="menu_zid_product_variants_images" name="Zid Product Variants Images"
+              action="polygon_zid.action_zid_product_variants_images"
+              parent="polygon_zid.menu_polygon_zid" sequence="8"/>
+
+    <!-- Zid Order EPT Menu -->
+    <menuitem id="menu_zid_order_ept" name="Zid Order EPT"
+              action="polygon_zid.action_zid_order_ept"
+              parent="polygon_zid.menu_polygon_zid" sequence="9"/>
+
+    <!-- Zid Order Lines EPT Menu -->
+    <menuitem id="menu_zid_order_lines_ept" name="Zid Order Lines EPT"
+              action="polygon_zid.action_zid_order_lines_ept"
+              parent="polygon_zid.menu_polygon_zid" sequence="10"/>
+
+    <!-- Zid Scheduler Log Line Menu -->
+    <menuitem id="menu_zid_scheduler_log_line" name="Zid Scheduler Log Line"
+              action="polygon_zid.action_zid_scheduler_log_line"
+              parent="polygon_zid.menu_zid_schedulers" sequence="11"/>
+
+    <!-- Zid Scheduler Log Menu -->
+    <menuitem id="menu_zid_scheduler_log" name="Zid Scheduler Log"
+              action="polygon_zid.action_zid_scheduler_log"
+              parent="polygon_zid.menu_zid_schedulers" sequence="11"/>
+
+    <!-- Zid App Menu -->
+    <menuitem id="menu_zid_app" name="Zid App"
+              action="polygon_zid.action_zid_app"
+              parent="polygon_zid.menu_zid_schedulers_configurations" sequence="12"
+              groups="polygon_base.group_polygon_super_admin,polygon_base.group_polygon_tech"/>
+
+    <!-- Zid Request Menu -->
+    <menuitem id="menu_zid_request" name="Zid Request"
+              action="polygon_zid.action_zid_request"
+              parent="polygon_zid.menu_zid_schedulers_configurations" sequence="13"/>
+
+    <!-- Zid Tokens Menu -->
+    <menuitem id="menu_zid_tokens" name="Zid Tokens"
+              action="polygon_zid.action_zid_tokens"
+              parent="polygon_zid.menu_zid_schedulers_configurations" sequence="14"/>
+
+    <!-- Zid User Menu -->
+    <menuitem id="menu_zid_user" name="Zid User"
+              action="polygon_zid.action_zid_user"
+              parent="polygon_zid.menu_zid_schedulers_configurations" sequence="15"/>
+
+    <!-- Zid Product Variants Menu -->
+    <menuitem id="menu_zid_product_variants" name="Zid Product Variants"
+              action="polygon_zid.action_zid_product_variants"
+              parent="polygon_zid.menu_polygon_zid" sequence="16"/>
+    <!--    Zid Currency Menu-->
+    <menuitem id="menu_zid_currency_master" name="Zid Currency"
+              action="polygon_zid.action_zid_currency"
+              parent="polygon_zid.menu_polygon_zid" sequence="17"/>
+
+     <!--    Zid Product Image Menu-->
+    <menuitem id="menu_zid_product_image" name="Zid Product Image"
+              action="polygon_zid.action_zid_product_image"
+              parent="polygon_zid.menu_polygon_zid" sequence="17"/>
+    <!--    Zid Currency Scheduler Menu-->
+    <menuitem id="menu_zid_currency_scheduler" name="Zid Currency Scheduler"
+              action="polygon_zid.action_zid_scheduler_currency"
+              parent="polygon_zid.menu_zid_schedulers" sequence="17"/>
+
+    <!--    Zid Store Locations Menu-->
+    <menuitem id="menu_zid_store_location" name="Zid Store Locations"
+              action="polygon_zid.action_store_locations"
+              parent="polygon_zid.menu_polygon_zid" sequence="17"/>
+
+    <!--    Zid Store Location Scheduler Menu-->
+    <menuitem id="menu_zid_store_location_scheduler" name="Zid Store Location Scheduler"
+              action="polygon_zid.action_zid_store_location_scheduler"
+              parent="polygon_zid.menu_zid_schedulers" sequence="17"/>
+
+    <!--    Zid Product Category Scheduler Menu-->
+    <menuitem id="menu_zid_product_category_scheduler" name="Zid Product Category Scheduler"
+              action="polygon_zid.action_zid_product_category_scheduler"
+              parent="polygon_zid.menu_zid_schedulers" sequence="17"/>
+
+    <!--    Zid Product Attribute Scheduler Menu-->
+    <menuitem id="menu_zid_product_attribute_scheduler" name="Zid Product Attribute Scheduler"
+              action="polygon_zid.action_zid_product_attribute_scheduler"
+              parent="polygon_zid.menu_zid_schedulers" sequence="17"/>
+
+    <!--    Zid Product Attribute Value Scheduler Menu-->
+    <menuitem id="menu_zid_product_attribute_value_scheduler" name="Zid Product Attribute Value Scheduler"
+              action="polygon_zid.action_zid_product_attribute_value_scheduler"
+              parent="polygon_zid.menu_zid_schedulers" sequence="17"/>
+
+    <!--    Zid Product Scheduler Menu-->
+    <menuitem id="menu_zid_product_scheduler" name="Zid Product Scheduler"
+              action="polygon_zid.action_zid_scheduler_products_variants"
+              parent="polygon_zid.menu_zid_schedulers" sequence="17"/>
+
+    <!--    Zid Product Variant Scheduler Menu-->
+    <menuitem id="menu_zid_product_variant_scheduler" name="Zid Product Variant Scheduler"
+              action="polygon_zid.action_zid_scheduler_products_variants"
+              parent="polygon_zid.menu_zid_schedulers" sequence="17"/>
+
+</odoo>

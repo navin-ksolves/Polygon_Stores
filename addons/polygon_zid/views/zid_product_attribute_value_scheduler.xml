@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    form-->
+    <record id="view_form_zid_product_attribute_value_scheduler" model="ir.ui.view">
+        <field name="name">zid.product.attribute.value.scheduler.form</field>
+        <field name="model">zid.product.attribute.value.scheduler</field>
+        <field name="arch" type="xml">
+            <form>
+                 <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="product_attribute_value_id"/>
+                        <field name="scheduler_log_id"/>
+                        <field name="attribute_scheduler_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Json Data">
+                            <field name="data"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <!-- views/tree_view.xml -->
+    
+    <record id="view_tree_zid_product_attribute_value_scheduler" model="ir.ui.view">
+        <field name="name">zid.product.attribute.value.scheduler.tree</field>
+        <field name="model">zid.product.attribute.value.scheduler</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="data"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- actions/actions.xml -->
+    
+    <record id="action_zid_product_attribute_value_scheduler" model="ir.actions.act_window">
+        <field name="name">Product Attribute Scheduler Value</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.product.attribute.value.scheduler</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Form View-->
+    <record id="view_form_zid_store_location_scheduler" model="ir.ui.view">
+        <field name="name">zid.store.locations.scheduler.form</field>
+        <field name="model">zid.store.locations.scheduler</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="scheduler_log_id"/>
+                        <field name="store_location_id"/>
+                        <field name="zid_instance_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Json Data">
+                            <field name="data"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree_view -->
+
+    <record id="view_tree_zid_store_location_scheduler" model="ir.ui.view">
+        <field name="name">zid.store.locations.scheduler.tree</field>
+        <field name="model">zid.store.locations.scheduler</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="status == 'failed'" decoration-success="status == 'done'" >
+<!--                <field name="data"/>-->
+                <field name="scheduler_log_id"/>
+                <field name="store_location_id"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- action -->
+
+    <record id="action_zid_store_location_scheduler" model="ir.actions.act_window">
+        <field name="name">Store Location Scheduler</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.store.locations.scheduler</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

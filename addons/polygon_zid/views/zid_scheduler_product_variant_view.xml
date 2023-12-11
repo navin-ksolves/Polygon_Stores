@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    form view-->
+    <record id="view_form_zid_scheduler_products_variants" model="ir.ui.view">
+        <field name="name">zid.scheduler.products.variants.form</field>
+        <field name="model">zid.scheduler.products.variants</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="scheduler_log_id"/>
+                        <field name="template"/>
+                        <field name="attribute"/>
+                        <field name="images"/>
+                        <field name="zid_product_variant_id"/>
+                        <field name="zid_product_scheduler_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Json Data">
+                            <field name="data"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view-->
+    <record id="view_tree_zid_scheduler_products_variants" model="ir.ui.view">
+        <field name="name">zid.scheduler.products.variants.tree</field>
+        <field name="model">zid.scheduler.products.variants</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="scheduler_log_id"/>
+                <field name="data"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- action -->
+
+    <record id="action_zid_scheduler_products_variants" model="ir.actions.act_window">
+        <field name="name">Zid Product Variant Scheduler</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.scheduler.products.variants</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

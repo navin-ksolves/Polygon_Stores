@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_view_inherit123" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='order_details']" position="inside">
+                <field name="delivery_order_ref"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="delivery_carrier_id"/>
+                <field name="driver_id" readonly="1"/>
+                <field name="product_owner_id"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_template_id']" position="attributes">
+              <attribute name="domain">[('x_product_owner', '=', parent.product_owner_id)]</attribute>
+        </xpath>
+        </field>
+    </record>
+
+    <record id="view_delivery_carrier_form_shipsy_delivery_partner" model="ir.ui.view">
+        <field name="name">delivery.carrier.form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="shipping_method"/>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

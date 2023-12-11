@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Define the new access rules -->
+        <record model="ir.rule" id="product_template_polygon_client_rule">
+            <field name="name">Product Template multi-company Polygon Client</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="groups" eval="[Command.link(ref('group_client_user'))]"/>
+            <field name="domain_force">['|',('product_owner','=',user.partner_id.parent_id.id),('company_id','in',company_ids),('company_id','=',False)]
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    form view-->
+    <record id="view_form_zid_scheduler_log" model="ir.ui.view">
+        <field name="name">zid.scheduler.log.form</field>
+        <field name="model">zid.scheduler.log</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                        <notebook>
+                            <page string="Logs" name="logs_page">
+                                <field name="log_line_ids" nolabel="1">
+                                    <tree>
+                                        <field name="instance_id"/>
+                                        <field name="scheduler_type"/>
+                                        <field name="attempts"/>
+                                        <field name="completed_lines"/>
+                                        <field name="total_lines"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- views/tree_view -->
+
+    <record id="view_tree_zid_scheduler_log" model="ir.ui.view">
+        <field name="name">zid.scheduler.log.tree</field>
+        <field name="model">zid.scheduler.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- action -->
+
+    <record id="action_zid_scheduler_log" model="ir.actions.act_window">
+        <field name="name">Zid Scheduler Log</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.scheduler.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

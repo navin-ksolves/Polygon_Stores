@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="module_polygon_category" model="ir.module.category">
+            <field name="name">Polygon User Access</field>
+        </record>
+        <!-- Define the new user group -->
+        <record id="group_client_user" model="res.groups">
+            <field name="name">Client User</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                    eval="[(4,ref('shopify_ept.group_shopify_ept')),(4,ref('sales_team.group_sale_manager'))]"/>
+        </record>
+        <record id="group_polygon_sales" model="res.groups">
+            <field name="name">Polygon Sales</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_ept')),(4,ref('sales_team.group_sale_manager'))]"/>
+        </record>
+        <record id="group_polygon_warehouse_picker" model="res.groups">
+            <field name="name">Polygon Warehouse Picker</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_ept'))]"/>
+        </record>
+        <record id="group_polygon_ops_executive" model="res.groups">
+            <field name="name">Polygon Ops Executive</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_ept'))]"/>
+        </record>
+        <record id="group_polygon_warehouse_executive" model="res.groups">
+            <field name="name">Polygon Warehouse Executive</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_ept'))]"/>
+        </record>
+        <record id="group_polygon_warehouse_manager" model="res.groups">
+            <field name="name">Polygon Warehouse Manager</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_ept'))]"/>
+        </record>
+        <record id="group_polygon_ops_manager" model="res.groups">
+            <field name="name">Polygon Ops Manager</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_manager_ept'))]"/>
+        </record>
+        <record id="group_polygon_finance" model="res.groups">
+            <field name="name">Polygon Finance</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_manager_ept'))]"/>
+        </record>
+        <record id="group_polygon_tech" model="res.groups">
+            <field name="name">Polygon Tech</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_manager_ept'))]"/>
+        </record>
+        <record id="group_polygon_management" model="res.groups">
+            <field name="name">Polygon Management</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_manager_ept'))]"/>
+        </record>
+        <record id="group_polygon_super_admin" model="res.groups">
+            <field name="name">Polygon Super Admin</field>
+            <field name="category_id" ref="polygon_base.module_polygon_category"/>
+            <field name="implied_ids"
+                   eval="[(4,ref('shopify_ept.group_shopify_manager_ept')),(4, ref('base.user_root')),(4, ref('base.user_admin'))]"/>
+        </record>
+    </data>
+</odoo>

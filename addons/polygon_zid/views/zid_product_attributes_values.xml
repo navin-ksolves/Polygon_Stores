@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--- Zid Product Attributes Values Form View -->
+    <record id="zid_product_attributes_values_form_view" model="ir.ui.view">
+        <field name="name">zid.product.attributes.values.form</field>
+        <field name="model">zid.product.attributes.values</field>
+        <field name="arch" type="xml">
+            <form string="Zid Product Attributes Values Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="value"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--- Zid Product Attributes Values Tree View -->
+    <record id="zid_product_attributes_values_tree_view" model="ir.ui.view">
+        <field name="name">zid.product.attributes.values.tree</field>
+        <field name="model">zid.product.attributes.values</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Zid Product Attributes Values">
+                <field name="value"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Search View Of Zid Product Attributes Values -->
+    <record id="zid_product_attributes_values_search_view" model="ir.ui.view">
+        <field name="name">zid.product.attributes.values.search</field>
+        <field name="model">zid.product.attributes.values</field>
+        <field name="arch" type="xml">
+            <search string="Zid Product Attributes Values">
+                <field name="value"/>
+            </search>
+        </field>
+    </record>
+
+    <!--- Action Zid Product Attributes Values -->
+    <record id="action_zid_product_attributes_values" model="ir.actions.act_window">
+        <field name="name">Zid Product Attributes Values</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">zid.product.attributes.values</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

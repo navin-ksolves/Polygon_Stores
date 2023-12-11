@@ -1,0 +1,34 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+sale_order_client_user,Sale Order Client Access,model_sale_order,group_client_user,1,1,1,0
+sale_order_polygon_sales,Sale Order Polygon Sales,model_sale_order,group_polygon_sales,1,0,0,0
+sale_order_polygon_ops_manager,Sale Order Polygon Ops Manager,model_sale_order,group_polygon_ops_manager,1,0,0,0
+sale_order_polygon_ops_executive,Sale Order Polygon Ops Executive,model_sale_order,group_polygon_ops_executive,1,0,0,0
+sale_order_polygon_warehouse_manager,Sale Order Polygon Warehouse Manager,model_sale_order,group_polygon_warehouse_manager,1,0,0,0
+sale_order_polygon_warehouse_executive,Sale Order Polygon Warehouse Executive,model_sale_order,group_polygon_warehouse_executive,1,0,0,0
+sale_order_polygon_warehouse_picker,Sale Order Polygon Warehouse Picker,model_sale_order,group_polygon_warehouse_picker,1,0,0,0
+sale_order_polygon_finance, Sale Order Polygon Finance,model_sale_order,group_polygon_finance,1,0,0,0
+sale_order_polygon_tech, Sale Order Polygon Tech,model_sale_order,group_polygon_tech,1,0,0,0
+sale_order_polygon_management, Sale Order Polygon Management,model_sale_order,group_polygon_management,1,0,0,0
+sale_order_polygon_super_admin, Sale Order Polygon Super Admin,model_sale_order,group_polygon_super_admin,1,1,1,1
+product_product_client_user,Product Product Client User Access,model_product_product,group_client_user,1,1,1,0
+product_product_polygon_sales,Product Product Polygon Sales,model_product_product,group_polygon_sales,1,0,0,0
+product_product_polygon_ops_manager,Product Product Polygon Ops Manager,model_product_product,group_polygon_ops_manager,1,0,0,0
+product_product_polygon_ops_executive,Product Product Polygon Ops Executive,model_product_product,group_polygon_ops_executive,1,0,0,0
+product_product_polygon_warehouse_manager,Product Product Polygon Warehouse Manager,model_product_product,group_polygon_warehouse_manager,1,0,0,0
+product_product_polygon_warehouse_executive,Product Product Polygon Warehouse Executive,model_product_product,group_polygon_warehouse_executive,1,0,0,0
+product_product_polygon_warehouse_picker,Product Product Polygon Warehouse Picker,model_product_product,group_polygon_warehouse_picker,1,0,0,0
+product_product_polygon_finance, Product Product Polygon Finance,model_product_product,group_polygon_finance,1,0,0,0
+product_product_polygon_tech, Product Product Polygon Tech,model_product_product,group_polygon_tech,1,0,0,0
+product_product_polygon_management, Product Product Polygon Management,model_product_product,group_polygon_management,1,0,0,0
+product_product_polygon_super_admin, Product Product Polygon Super Admin,model_product_product,group_polygon_super_admin,1,1,1,1
+product_template_client_user,Product Template Client User Access,model_product_template,group_client_user,1,1,1,0
+product_template_polygon_sales,Product Template Polygon Sales,model_product_template,group_polygon_sales,1,0,0,0
+product_template_polygon_ops_manager,Product Template Polygon Ops Manager,model_product_template,group_polygon_ops_manager,1,0,0,0
+product_template_polygon_ops_executive,Product Template Polygon Ops Executive,model_product_template,group_polygon_ops_executive,1,0,0,0
+product_template_polygon_warehouse_manager,Product Template Polygon Warehouse Manager,model_product_template,group_polygon_warehouse_manager,1,0,0,0
+product_template_polygon_warehouse_executive,Product Template Polygon Warehouse Executive,model_product_template,group_polygon_warehouse_executive,1,0,0,0
+product_template_polygon_warehouse_picker,Product Template Polygon Warehouse Picker,model_product_template,group_polygon_warehouse_picker,1,0,0,0
+product_template_polygon_finance, Product Template Polygon Finance,model_product_template,group_polygon_finance,1,0,0,0
+product_template_polygon_tech, Product Template Polygon Tech,model_product_template,group_polygon_tech,1,0,0,0
+product_template_polygon_management, Product Template Polygon Management,model_product_template,group_polygon_management,1,0,0,0
+product_template_polygon_super_admin, Product Template Polygon Super Admin,model_product_template,group_polygon_super_admin,1,1,1,1

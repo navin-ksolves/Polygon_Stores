@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_template_owner" model="ir.ui.view">
+        <field name="name">product.owner</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="product_owner"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_variant_owner" model="ir.ui.view">
+        <field name="name">product.variant.owner</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="product_variant_owner"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
