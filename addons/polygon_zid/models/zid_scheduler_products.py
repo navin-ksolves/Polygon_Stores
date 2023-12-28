@@ -59,7 +59,7 @@ class ZidProductScheduler(models.Model):
                         'instance_id': product.scheduler_log_id.instance_id.id,
                         'zid_product_categ_id': product_category.id if product_category else False,
                         'has_variants': product_template.get('has_options'),
-                        'requires_shipping': product_template.get('requies_shipping'),
+                        'requires_shipping': product_template.get('requires_shipping'),
                         'is_taxable': product_template.get('is_taxable'),
                         'structure': product_template.get('structure'),
                         'is_published': product_template.get('is_published')
