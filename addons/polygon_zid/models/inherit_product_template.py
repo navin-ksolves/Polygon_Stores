@@ -29,7 +29,7 @@ class InheritProductTemplate(models.Model):
                     try:
                         http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED',
                                                    ca_certs=certifi.where())
-                        image_response = http.request('GET', self.image_url)
+                        image_response = http.request('GET', product.image_url)
                         image = base64.b64encode(image_response.data)
                     except Exception as e:
                         # Handle URL loading errors
@@ -38,7 +38,7 @@ class InheritProductTemplate(models.Model):
                 else:
                     # Load image from local file path
                     try:
-                        with open(self.image_url, 'rb') as image_file:
+                        with open(product.image_url, 'rb') as image_file:
                             image = base64.b64encode(image_file.read())
                     except Exception as e:
                         # Handle local file loading errors
