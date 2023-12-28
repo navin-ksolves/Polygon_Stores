@@ -48,7 +48,6 @@ class ZidSchedulerLog(models.Model):
         """
         record_limit = args.get('limit')
         scheduler_id = self.search([('date', '=', datetime.datetime.now())])
-        scheduler_id = self.search([('id', '=', 147)]) #TODO: remove
         tasks = self.env['zid.scheduler.log.line'].search([('status', '=', 'draft'),
                                                            ('scheduler_log_id', '=', scheduler_id.id)], limit=record_limit)
 
