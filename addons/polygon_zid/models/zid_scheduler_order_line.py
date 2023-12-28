@@ -83,7 +83,7 @@ class ZidSchedulerOrderLine(models.Model):
                                                           'scheduler_order_id')
                 # Update scheduler log line attempts
                 common_functions.update_log_line_attempts(self, 'zid.scheduler.order',
-                                                          orders_line.scheduler_log_id,
+                                                          orders_line.scheduler_order_id.scheduler_log_id,
                                                           'scheduler_log_id')
                 _logger.error(str(e))
                 _logger.error("Order Line Creation Failed!!")

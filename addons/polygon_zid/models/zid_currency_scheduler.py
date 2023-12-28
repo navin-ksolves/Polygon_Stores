@@ -63,4 +63,3 @@ class ZidSchedulerState(models.Model):
                 _logger.error(f"Currency creation for currency with Zid Id {curr['id']} failed!!")
             common_functions.update_scheduler_log_state(currency.scheduler_log_id)
 
-        common_functions.update_log_line_attempts()
