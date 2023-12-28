@@ -61,10 +61,10 @@ class ZidProductVariants(models.Model):
                                    'description': vals['description'],
                                    'owner_id': vals['owner_id']})
 
-            product_variant.product_template_id.write({'name': vals['name'], 'description': vals['description'],
+            product_variant.product_template_id.write({'description': vals['description'],
                                                        'product_owner': vals['owner_id']})
 
-            product_variant.product_variant_id.write({'name': vals['name'], 'description': vals['description'],
+            product_variant.product_variant_id.write({'description': vals['description'],
                                                       'product_owner': vals['owner_id']})
 
             return product_variant

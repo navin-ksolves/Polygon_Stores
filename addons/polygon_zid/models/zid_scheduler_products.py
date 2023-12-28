@@ -141,7 +141,7 @@ class ZidProductScheduler(models.Model):
         :return: zid_variant record
         """
         product_variant_vals = {
-            # 'name': product_template.get('name')['en'],
+            'name': product_template.get('name')['en'],
             'zid_parent_id': product_template['parent_id'],
             'description': product_template.get('short_description'),
             'owner_id': product.scheduler_log_id.instance_id.owner_id.id,
