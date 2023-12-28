@@ -34,7 +34,7 @@
         <field name="arch" type="xml">
             <tree sample="1">
                 <field name="status"/>
-                <field name="data"/>
+<!--                <field name="data"/>-->
                 <field name="order_id"/>
                 <field name="locations"/>
                 <field name="header"/>

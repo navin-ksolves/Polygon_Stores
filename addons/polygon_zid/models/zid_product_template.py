@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+from odoo import models, fields, api
 from . import common_functions
 import requests
 import logging
@@ -34,6 +34,9 @@ class ZidProductTemplate(models.Model):
     default_discount = fields.Boolean(string='Default Discount Product', default=False, tracking=True)
     active = fields.Boolean(string='Active', default=True, tracking=True)
 
+    product_image = fields.Image("Image", related='primary_product_id.image_1920', compute_sudo=True)
+    zid_stock_id = fields.Char('Zid Stock Id')
+    @api.model
     def create(self, vals):
         """
         Overrided this function to prevent duplication
@@ -42,9 +45,10 @@ class ZidProductTemplate(models.Model):
         """
         _logger.info("Creating Zid Product Template")
         _logger.info(vals)
-        vals['name'] = vals['name'] + " - " + str(vals['zid_id'])
+        if isinstance(vals['name'], dict):
+            vals['name'] = vals['name']['en'] + " - " + str(vals['zid_id'])
         # Check if product template exists:
-        product_template = self.search([('owner_id', '=', vals['owner_id']),
+        product_template = self.search([('instance_id', '=', vals['instance_id']),
                                         ('zid_id', '=',vals['zid_id'])])
         if product_template:
             product_template.write({'name': vals['name'],
@@ -118,21 +122,21 @@ class ZidProductTemplate(models.Model):
 
         return product_template
 
-    def create_zid_product_template_sync_logs(self):
-        """
-        function to create sync log for product in scheduler.log for each instance
-        :return:
-        """
-        _logger.info("Creating Sync Logs For Products!!")
-        instances = self.env['zid.instance.ept'].search([])
-        for instance in instances:
-            url = "https://api.zid.sa/v1/products/"
-            headers = common_functions.fetch_authentication_details(self, instance.id)
-            store_id = self.env['zid.tokens'].search([('access_token', '=', instance.access_token)]).zid_request_id.store_id
-            headers['Access-Token'] = headers.pop('X-Manager-Token')
-            headers['Store-Id'] = store_id
-            response = requests.get(url, headers=headers)
-            if response.status_code == 200:
-                json_data = {'data': response.json()}
-                common_functions.create_log_in_scheduler(self, instance, create_log_for=['product'],
-                                                         json_data=json_data)
+    # def create_zid_product_template_sync_logs(self):
+    #     """
+    #     function to create sync log for product in scheduler.log for each instance
+    #     :return:
+    #     """
+    #     _logger.info("Creating Sync Logs For Products!!")
+    #     instances = self.env['zid.instance.ept'].search([])
+    #     for instance in instances:
+    #         url = "https://api.zid.sa/v1/products/"
+    #         headers = common_functions.fetch_authentication_details(self, instance.id)
+    #         store_id = self.env['zid.tokens'].search([('access_token', '=', instance.access_token)]).zid_request_id.store_id
+    #         headers['Access-Token'] = headers.pop('X-Manager-Token')
+    #         headers['Store-Id'] = store_id
+    #         response = requests.get(url, headers=headers)
+    #         if response.status_code == 200:
+    #             json_data = {'data': response.json()}
+    #             common_functions.create_log_in_scheduler(self, instance, create_log_for=['product'],
+    #                                                      json_data=json_data)

@@ -4,7 +4,7 @@
 from odoo import models, fields, api
 
 
-class SaleAutoWorkflowConfiguration(models.Model):
+class ZidSaleAutoWorkflowConfiguration(models.Model):
     _name = "zid.sale.auto.workflow.configuration.ept"
     _description = 'Zid Sale auto workflow configuration'
 

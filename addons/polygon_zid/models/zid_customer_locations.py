@@ -20,3 +20,20 @@ class ZidCustomerLocations(models.Model):
     active = fields.Boolean(string="Active", default=True, tracking=True)
     state = fields.Many2one('zid.state.master', 'City', tracking=True)
     country = fields.Many2one('zid.country.master', 'Country', tracking=True)
+
+    def create(self, vals):
+        address = super(ZidCustomerLocations, self).create(vals)
+        city = self.env['zid.state.master'].browse(vals.get('state'))
+        country = self.env['zid.country.master'].search([('zid_country_id','=',vals.get('county'))])
+        partner_record = self.env['res.partner'].search([('id','=', address.customer_id.customer_partner_id.id)])
+        if partner_record:
+            partner_address_vals = {
+                'parent_id':partner_record.id,
+                'street': vals.get('street'),
+                'city': city.display_name,
+                'country_id': country.odoo_country.id if country else False,
+                'type' : 'delivery' if vals['is_shipping'] else 'invoice'
+            }
+            partner_record.create(partner_address_vals)
+        # Create address in res_partner record
+        return address

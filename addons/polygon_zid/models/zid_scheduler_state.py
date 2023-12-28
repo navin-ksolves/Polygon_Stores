@@ -16,20 +16,23 @@ class ZidSchedulerState(models.Model):
     data = fields.Text(string="Json Data", readonly=True)
     state_master_id = fields.Many2one('zid.state.master', string='State Master', readonly=True)
     scheduler_log_id = fields.Many2one('zid.scheduler.log.line', string="Scheduler Log", readonly=True)
+    attempts = fields.Integer("Scheduler Attempts")
 
 
-    def create_record_in_zid_state_master(self):
+    def create_record_in_zid_state_master(self, args = {}):
         """
         Function to create record in zid state master if state not present
         :return:
         """
-        draft_states = self.search([('status', '=', 'draft')])
+        record_limit = args.get('limit')
+        draft_states = self.search(['|', '&', ('status','=','failed'),('attempts','<', 3),('status', '=', 'draft')], limit = record_limit)
         state_objs = self.env['zid.state.master']
 
         for state in draft_states:
             try:
                 _logger.info("Creating Zid State Record")
                 state.status = 'progress'
+                state.attempts += 1
                 input_string = state['data']
                 city = ast.literal_eval(input_string)
 
@@ -48,10 +51,11 @@ class ZidSchedulerState(models.Model):
                     state.state_master_id = state_master.id
                     state.status = 'done'
                     state.scheduler_log_id.completed_lines += 1
-
-                else:
-                    state.status = 'failed'
-                common_functions.update_scheduler_log_state(state.scheduler_log_id)
+                    common_functions.update_scheduler_log_state(state.scheduler_log_id)
+                    common_functions.update_log_line_attempts(self, 'zid.scheduler.state', state.scheduler_log_id, 'scheduler_log_id')
             except Exception as e:
+                state.status = 'failed'
+                common_functions.update_log_line_attempts(self, 'zid.scheduler.state', state.scheduler_log_id,
+                                                          'scheduler_log_id')
                 _logger.error(str(e))
 

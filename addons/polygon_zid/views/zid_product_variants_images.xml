@@ -9,10 +9,15 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="url"/>
-                            <field name="active"/>
-                        </group>
+                            <field name="zid_id"/>
+                            <field name="thumbnail_image_url"/>
+                            <field name="medium_image_url"/>
+                            <field name="small_image_url"/>
+                            <field name="full_size_image_url"/>
+                            <field name="large_image_url"/>
+                            <field name="alt_text"/>
+                            <field name="display_order"/>
+                            <field name="zid_product_id"/>                        </group>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -30,24 +35,25 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree string="Zid Product Variants Images">
-                <field name="name"/>
-                <field name="url"/>
+                <field name="zid_id"/>
+                <field name="thumbnail_image_url"/>
+                <field name="full_size_image_url"/>
             </tree>
         </field>
     </record>
 
     <!--Search View Of Zid Product Variants Images -->
-    <record id="zid_product_variants_images_search_view" model="ir.ui.view">
-        <field name="name">zid.product.variants.images.search</field>
-        <field name="model">zid.product.variants.images</field>
-        <field name="arch" type="xml">
-            <search string="Zid Product Variants Images">
-                <field name="name"/>
-                <separator/>
-                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>
-            </search>
-        </field>
-    </record>
+<!--    <record id="zid_product_variants_images_search_view" model="ir.ui.view">-->
+<!--        <field name="name">zid.product.variants.images.search</field>-->
+<!--        <field name="model">zid.product.variants.images</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Zid Product Variants Images">-->
+<!--                <field name="name"/>-->
+<!--                <separator/>-->
+<!--                <filter name="archived" string="Archived" domain="[('active','=',False)]"/>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!--- Action Zid Product Variants Images -->
     <record id="action_zid_product_variants_images" model="ir.actions.act_window">

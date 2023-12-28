@@ -8,6 +8,8 @@
         <form string="Create Scheduler Log">
             <group>
                 <field name="scheduler_type"/>
+                <field name="date_from" attrs="{'invisible':[('scheduler_type','!=','order')]}"/>
+                <field name="date_to" attrs="{'invisible':[('scheduler_type','!=','order')]}"/>
             </group>
             <footer>
               <button string="Cancel" class="btn-seconadary" special="cancel"/>

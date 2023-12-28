@@ -18,21 +18,25 @@ class ZidStoreLocationsScheduler(models.Model):
     store_location_id = fields.Many2one('zid.store.locations', string='Store Location', readonly=True)
     scheduler_log_id = fields.Many2one('zid.scheduler.log.line', string="Scheduler Log", readonly=True)
     zid_instance_id = fields.Many2one('zid.instance.ept', string="Zid Instance", tracking=True, readonly=True)
+    attempts = fields.Integer("Scheduler Attempts", related='scheduler_log_id.attempts')
 
     @api.model
-    def create_zid_store_location_record(self):
+    def create_zid_store_location_record(self, args={}):
         """
         Function to create record in zid store location
         :return:
         """
         _logger.info("Processing Store Locations Queue!!")
+        record_limit = args.get('limit')
+        draft_store_locations = self.search([('status', '=', 'draft')], limit=record_limit)
+        draft_store_locations = self.search(['|', '&', ('status','=','failed'),('attempts','<=', 3),('status', '=', 'draft')], limit = record_limit)
 
-        draft_store_locations = self.search([('status', '=', 'draft')])
         store_locations_objs = self.env['zid.store.locations']
 
         for store_location in draft_store_locations:
             try:
                 store_location.status = 'progress'
+                store_location.scheduler_log_id.attempts += 1
                 input_string = store_location['data']
                 store_location_detail = ast.literal_eval(input_string)
                 store_location_id = store_locations_objs.search([('zid_location_id', '=', store_location_detail['id']), (
@@ -76,6 +80,7 @@ class ZidStoreLocationsScheduler(models.Model):
                     _logger.info(f"Zid Store Location with zid id {store_location_detail.get('id')} created")
             except Exception as e:
                 store_location.status = 'failed'
+                common_functions.update_scheduler_log_state(store_location.scheduler_log_id, 'failed')
                 _logger(str(e))
                 _logger.error(f"Zid Store Location with zid id {store_location_detail.get('id')} failed")
 

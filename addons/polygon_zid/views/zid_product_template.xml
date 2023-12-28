@@ -7,21 +7,23 @@
         <field name="arch" type="xml">
             <form string="Zid Product Template Details">
                 <sheet>
+                    <field name="product_image" nolabel="1" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
                             <field name="name"/>
                             <field name="owner_id"/>
                             <field name="instance_id"/>
                             <field name="zid_product_categ_id"/>
-<!--                            <field name="zid_product_template_id"/>-->
+                            <field name="zid_id"/>
+                            <field name="requires_shipping"/>
                             <field name="primary_product_id"/>
-<!--                            <field name="zid_product_template_url"/>-->
+                            <!--                            <field name="zid_product_template_url"/>-->
                             <field name="active"/>
                         </group>
                         <group>
                             <field name="description"/>
-<!--                            <field name="zid_product_template_type"/>-->
-<!--                            <field name="zid_product_template_status"/>-->
+                            <!--                            <field name="zid_product_template_type"/>-->
+                            <!--                            <field name="zid_product_template_status"/>-->
                             <field name="has_variants"/>
                             <field name="default_shipping"/>
                             <field name="default_discount"/>
@@ -48,7 +50,7 @@
                 <field name="owner_id"/>
                 <field name="instance_id"/>
                 <field name="zid_product_categ_id"/>
-<!--                <field name="zid_product_template_id"/>-->
+                <!--                <field name="zid_product_template_id"/>-->
                 <field name="primary_product_id"/>
             </tree>
         </field>
@@ -65,7 +67,7 @@
                 <field name="owner_id"/>
                 <field name="instance_id"/>
                 <field name="zid_product_categ_id"/>
-<!--                <field name="zid_product_template_id"/>-->
+                <!--                <field name="zid_product_template_id"/>-->
                 <field name="primary_product_id"/>
                 <separator/>
                 <filter name="archived" string="Archived" domain="[('active','=',False)]"/>

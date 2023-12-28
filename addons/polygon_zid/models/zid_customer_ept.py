@@ -19,7 +19,7 @@ class ZidCustomer(models.Model):
 
     def create(self, vals):
         # Check if customer present
-        customer = self.search([('email','=', vals['email']), ('instance_id','=', vals['instance_id'])])
+        customer = self.search([('email', '=', vals['email']), ('instance_id', '=', vals['instance_id'])])
         if customer:
             # Update the customer details:
             customer.write(vals)
@@ -30,11 +30,11 @@ class ZidCustomer(models.Model):
             partner_obj = self.env['res.partner']
             customer_partner = partner_obj.sudo().search([('email', '=', vals['email'])], limit=1)
             if customer_partner:
-                # Create the customer:
+                # Link the existing customer to zid_customer
                 vals['customer_partner_id'] = customer_partner.id
             else:
                 # Create the customer in odoo:
-                customer_partner =partner_obj.sudo().create({
+                customer_partner = partner_obj.sudo().create({
                     'name': vals['name'],
                     'email': vals['email'],
                     'phone': vals['phone']
@@ -44,4 +44,3 @@ class ZidCustomer(models.Model):
         _logger.info("Customer created!")
         self.env.cr.commit()
         return customer
-

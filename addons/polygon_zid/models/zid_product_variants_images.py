@@ -7,10 +7,6 @@ class ZidProductVariantsImages(models.Model):
     _description = 'Zid Product Variants Images'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string='Name', required=True, tracking=True)
-    url = fields.Char(string='URL', required=True, copy=False)
-    active = fields.Boolean(string="Active", default=True, tracking=True)
-
     zid_id = fields.Char('Zid Id')
     thumbnail_image_url = fields.Char('ThumbNail')
     medium_image_url = fields.Char('Medium Image')

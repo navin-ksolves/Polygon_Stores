@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields
-
+import datetime
 
 class ZidInstance(models.Model):
     _name = 'zid.instance.ept'
@@ -49,35 +49,157 @@ class ZidInstance(models.Model):
 
     def order_count_for_day(self):
         """Order Count for the day"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_now),
+                                                    ('state', 'in', ['sale', 'done'])])
 
     def order_count_for_week(self):
         """Order Count for the week"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        # Date 7 days ago:
+        datetime_7_days = datetime_now - datetime.timedelta(days=7)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_7_days),
+                                                    ('date_order', '<=',
+                                                     datetime_now.replace(hour=23, minute=59, second=59)),
+                                                    ('state', 'in', ['sale', 'done'])])
 
     def order_count_for_month(self):
         """Order Count for the month"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        # Date 30 days ago:
+        datetime_30_days = datetime_now - datetime.timedelta(days=30)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_30_days),
+                                                    ('date_order', '<=',
+                                                     datetime_now.replace(hour=23, minute=59, second=59)),
+                                                    ('state', 'in', ['sale', 'done'])])
 
     def order_count_for_year(self):
-        """Order Count for the year"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        # Date 65 days ago:
+        datetime_1_year = datetime_now - datetime.timedelta(days=365)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_1_year),
+                                                    ('date_order', '<=', datetime_now.replace(hour=23, minute=59, second=59)),
+                                                    ('state', 'in', ['sale', 'done'])])
 
     def order_count_yesterday(self):
         """Order Count for the yesterday"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        # Date 1 day ago:
+        datetime_now = datetime_now - datetime.timedelta(days=1)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_now),
+                                                    ('date_order', '<=',
+                                                     datetime_now.replace(hour=23, minute=59, second=59)),
+                                                    ('state', 'in', ['sale', 'done'])])
 
     def order_count_last_week(self):
         """Order Count for the last week"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        # Date 7 day ago:
+        datetime_end = datetime_now - datetime.timedelta(days=8)
+
+        # Date 14 day ago:
+        datetime_start = datetime_now - datetime.timedelta(days=15)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_start),
+                                                    ('date_order', '<=',
+                                                     datetime_end.replace(hour=23, minute=59, second=59)),
+                                                    ('state', 'in', ['sale', 'done'])])
 
     def order_count_last_month(self):
         """Order Count for the last month"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        # Date 30 day ago:
+        datetime_end = datetime_now - datetime.timedelta(days=31)
+
+        # Date 60 day ago:
+        datetime_start = datetime_now - datetime.timedelta(days=61)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_start),
+                                                    ('date_order', '<=',
+                                                     datetime_end.replace(hour=23, minute=59, second=59)),
+                                                    ('state', 'in', ['sale', 'done'])])
 
     def order_count_last_year(self):
         """Order Count for the last year"""
-        pass
+        datetime_now = datetime.datetime.now()
+
+        # Make the time as 00:00:00:
+        datetime_now = datetime_now.replace(hour=0, minute=0, second=0)
+
+        # Make the datetime without any tz info:
+        datetime_now = datetime_now.replace(tzinfo=None)
+
+        # Date 365 day ago:
+        datetime_end = datetime_now - datetime.timedelta(days=366)
+
+        # Date 730 day ago:
+        datetime_start = datetime_now - datetime.timedelta(days=731)
+
+        return self.env['sale.order'].search_count([('instance_id', '=', self.polygon_instance_id.id),
+                                                    ('date_order', '>=', datetime_start),
+                                                    ('date_order', '<=',
+                                                     datetime_end.replace(hour=23, minute=59, second=59)),
+                                                    ('state', 'in', ['sale', 'done'])])
 
 
 class ZidWebhook(models.Model):

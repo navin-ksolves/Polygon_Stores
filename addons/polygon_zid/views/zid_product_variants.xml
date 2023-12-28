@@ -7,9 +7,11 @@
         <field name="arch" type="xml">
             <form string="Zid Product Variants Details">
                 <sheet>
+                    <field name="product_image" nolabel="1" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
                             <field name="zid_sku"/>
+                            <field name="zid_id"/>
                             <field name="price"/>
                             <field name="sale_price"/>
                             <field name="on_sale"/>

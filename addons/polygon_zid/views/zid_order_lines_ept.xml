@@ -13,12 +13,7 @@
                             <field name="order_id"/>
                             <field name="so_line_id"/>
                             <field name="product_id"/>
-                        </group> <group>
-                        <field name="name"/>
-                        <field name="order_id"/>
-                        <field name="so_line_id"/>
-                        <field name="product_id"/>
-                    </group>
+                        </group>
                         <group>
                             <field name="item_id"/>
                             <field name="quantity"/>

@@ -36,26 +36,6 @@ class ZidCountryMaster(models.Model):
                     common_functions.create_log_in_scheduler(self, instance, create_log_for=['sync_states'], json_data=json_data)
             country.is_state_synced = True
 
-    # def sync_states(self):
-    #     """
-    #     Function for the CRON to sync states of the particular countries
-    #     """
-    #     try:
-    #         countries = self.search([('is_state_synced', '=', False)])
-    #         for country in countries:
-    #             country_id = country.zid_country_id
-    #             url = f"https://api.zid.sa/v1/managers/cities/by-country-id/{country_id}"
-    #             headers = self.fetch_authentication_details()
-    #             response = requests.get(url, headers=headers)
-    #             if response.status_code == 200:
-    #                 cities = response.json()['cities']
-    #                 for city in cities:
-    #                    self.create_zid_state_master(city, country)
-    #         return True
-    #     except Exception as e:
-    #         _logger.info(str(e))
-    #         return False
-
     def create_zid_state_master(self, city, zid_country_master):
         """
          Helper function to create zid_state_master

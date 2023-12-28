@@ -4,7 +4,6 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-
 class ZidOrderEpt(models.Model):
     _name = 'zid.order.ept'
     _description = 'Zid Order Ept'
@@ -33,6 +32,8 @@ class ZidOrderEpt(models.Model):
     total_tax = fields.Float(string="Total Tax", tracking=True)
     total_price = fields.Float(string="Total Price", tracking=True)
     delivery_address_id = fields.Many2one('zid.customer.locations','Delivery Address')
+    order_status =fields.Char('Zid Order Status')
+    zid_order_line_ids = fields.One2many('zid.order.lines.ept','order_id', string='Zid Order Lines')
 
     def create(self, vals):
         # Check if order already exists
@@ -61,11 +62,31 @@ class ZidOrderEpt(models.Model):
                     'company_id': instance.company_id.id,
                     'warehouse_id': instance.warehouse_id.id,
                     'team_id': instance.sales_team_id.id,
+                    'date_order': vals['order_datetime'],
+                    'zid_instance_id': instance.id
                 }
                 so = so_obj.create(so_vals)
                 if so:
                     vals['so_id'] = so.id
                     # _logger.error(f"Sale Order Creation Failed for zid order {vals['name']}")
             zid_order = super(ZidOrderEpt, self).create(vals)
+            payment_status_vals = {
+                'name' : vals['payment_method'],
+                'zid_instance_id': instance.id
+            }
+            payment_gateway = self.env['zid.payment.gateway.ept'].create(payment_status_vals)
+
+            financial_status_vals = {
+                'financial_status': vals['fulfillment_status'],
+                'payment_gateway_id': payment_gateway.id,
+                'zid_instance_id': instance.id
+            }
+            self.env['zid.sale.auto.workflow.configuration.ept'].create(financial_status_vals)
+
             return zid_order
 
+
+class InheritSaleOrder(models.Model):
+    _inherit = "sale.order"
+
+    zid_instance_id = fields.Many2one('zid.instance.ept', 'Zid Instance')

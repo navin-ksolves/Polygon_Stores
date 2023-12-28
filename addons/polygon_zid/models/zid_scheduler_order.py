@@ -2,9 +2,9 @@
 from odoo import models, fields, api
 from . import common_functions
 from odoo.exceptions import ValidationError
-import logging, ast
 from datetime import datetime
 import requests
+import logging, ast
 
 _logger = logging.getLogger(__name__)
 
@@ -23,13 +23,15 @@ class ZidSchedulerOrder(models.Model):
     line_done = fields.Integer('Line Done', readonly=True)
     scheduler_log_id = fields.Many2one('zid.scheduler.log.line', string="Scheduler Log", readonly=True)
     customer = fields.Boolean('Customer', readonly=True)
+    attempts = fields.Integer("Scheduler Attempts")
 
-    def process_zid_order_queue(self):
+    def process_zid_order_queue(self, args={}):
         """
         Cron function to process order queue
         :return:
         """
-        orders = self.env['zid.scheduler.order'].search([('status', '=', 'draft')])
+        record_limit = args.get('limit')
+        orders = self.search(['|', '&', ('status','=','failed'),('attempts','<', 3),('status', '=', 'draft')], limit = record_limit)
         _logger.info("Syncing Zid Orders!!")
         order_objs = self.env['zid.order.ept']
         for order in orders:
@@ -49,6 +51,8 @@ class ZidSchedulerOrder(models.Model):
                         'instance_id': order.scheduler_log_id.instance_id.id
                     }
                     zid_customer = self.env['zid.customer.ept'].create(customer_vals)
+
+                # Creating customer location
                 if full_order_data.get('shipping').get('address'):
                     address = full_order_data.get('shipping').get('address')
                     state = self.env['zid.state.master'].search([('zid_state_id','=',address.get('city').get('id'))])
@@ -60,17 +64,18 @@ class ZidSchedulerOrder(models.Model):
                         'street2' : address['district'],
                         'is_billing': False,
                         'is_shipping': True,
-                        'state' : state.id,
-                        'country' : country.id
+                        'state' : state.id if state else False,
+                        'country' : country.id if country else False
                     }
                     customer_location = self.env['zid.customer.locations'].create(address_vals)
 
                 if zid_customer:
                     order.customer = True
-                # Creating order
+                # Creating zid order
                 zid_order_vals = {
                     'name': order_data['code'],
                     'online_order_id': order_data['id'],
+                    'order_status': order_data['order_status']['code'],
                     'order_partner_id': zid_customer.id,
                     'partner_location_id': zid_customer.customer_partner_id.id,
                     'delivery_address_id': customer_location.id,
@@ -100,8 +105,9 @@ class ZidSchedulerOrder(models.Model):
                 if order_record:
                     _logger.info('Order created! Order ID: %s, processing other items' % order[0])
                     # order.store_location_id = store_location_id.id
-                    order.status = 'done'
-                    order.scheduler_log_id.completed_lines += 1
+                    # order.status = 'done'
+                    # order.scheduler_log_id.completed_lines += 1
+                    # Calculating number of order lines linked to the order
                     order.line_count = full_order_data['products_count']
                     common_functions.update_scheduler_log_state(order.scheduler_log_id)
                     # Creating Order Line Logs

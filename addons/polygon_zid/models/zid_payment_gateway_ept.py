@@ -11,14 +11,13 @@ from odoo.exceptions import UserError
 # from ..shopify.pyactiveresource.connection import ClientError
 
 
-class ShopifyPaymentGateway(models.Model):
+class ZidPaymentGateway(models.Model):
     _name = 'zid.payment.gateway.ept'
     _description = "Zid Payment Gateway"
 
     name = fields.Char(help="Payment method name")
     code = fields.Char(help="Payment method code given by zid")
-    # shopify_instance_id = fields.Many2one("shopify.instance.ept", required=True, string="Instance")
-    zid_instance_id = fields.Char(required=True, string="Instance")
+    zid_instance_id = fields.Many2one('zid.instance.ept', 'Zid Instance')
     active = fields.Boolean(default=True)
 
     # def import_payment_gateway(self, instance):

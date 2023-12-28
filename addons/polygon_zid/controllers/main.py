@@ -1,16 +1,77 @@
-from odoo import http
-from odoo.http import request, Response
+# -*- coding: utf-8 -*-
+
+from odoo.http import Response
 from urllib.parse import urlencode
 import requests
 from werkzeug.utils import redirect
-
 from ..models import common_functions
+from odoo import http
+from odoo.exceptions import UserError
+from odoo.http import request
+from datetime import datetime
+import logging
+
+utc_time = datetime.utcnow()
+_logger = logging.getLogger(__name__)
+from ...delivery_partner_integration.controllers.controller import DeliveryCarrier
+
+
+class InheritDeliveryCarrier(DeliveryCarrier):
+    @http.route('/order/update/status', type="json", auth="public", methods=['POST'], cors="*")
+    def order_update_status(self):
+        post_data = request.get_json_data()
+        _logger.info("POST DATA===>>>>>>>>>>>>>>>>>>>{}".format(post_data))
+        _logger.info("SESSION===>>>>>>>>>>>>>>{}".format(request.session))
+        if post_data.get('order_number'):
+            if '#' in post_data.get('order_number'):
+                order = (post_data.get('order_number').split('#'))[0]
+            elif '.' in post_data.get('order_number'):
+                order = (post_data.get('order_number').split('.'))[0]
+            else:
+                order = post_data.get('order_number')
+            # user_id = request.env['res.users'].sudo().search([('id','=',2)])
+            # _logger.info("COMPANY IDS++++====>>>>>>>>>>{}".format(user_id.company_ids.ids))
+            sale_order = request.env['sale.order'].sudo().search([('name', '=ilike', order)])
+            if sale_order:
+                _logger.info("ORDER===>>>>>>>>>>>>>>>>{}".format(order))
+
+                picking_id = request.env['stock.picking'].sudo().search(
+                    [('sale_id', '=', sale_order.id), ('state', 'not in', ['done', 'cancel'])])
+                _logger.info("PICKING ID====>>>>>>>>>>>>>>{}".format(picking_id))
+
+        if post_data.get('status') in ['attempted', 'cancelled'] and picking_id.state not in ['done', 'cancel'] and picking_id.attempt >= 3:
+            if picking_id.state not in ['done', 'cancel']:
+                if picking_id.attempt >= 3:
+                    common_functions.update_zid_order_status_based_on_picking(request,sale_order, picking_id,
+                                                                              picking_cancelled=True)
+                    return super(InheritDeliveryCarrier, self).order_update_status()
+        # Updating order status in zid
+        else:
+            res = super(InheritDeliveryCarrier, self).order_update_status()
+            common_functions.update_zid_order_status_based_on_picking(request,sale_order, picking_id, tracking_url= post_data.get('tracking_url'))
+            return res
+
 
 class Main(http.Controller):
 
-    @http.route('/zid/product', auth='none', methods=['POST'], csrf=False)
-    def zid_product(self, **kwargs):
-        print("Hi")
+    @http.route(['/zid/product', '/zid/order'], type='json', auth='none', methods=['POST'], csrf=False)
+    def zid_webhook(self, **kwargs):
+        """
+        Function to create log for webhook in scheduler_log_line using the data from webhook
+        """
+        webhook_event = request.httprequest.environ.get('HTTP_WEBHOOK_EVENT')
+        data = request.dispatcher.jsonrequest
+        store_id = data.get("store_id")
+        zid_store_id = request.env['zid.instance.ept'].search([('store_id', '=', store_id)], limit=1)
+        data_for_log = {
+            'scheduler_type': 'webhook',
+            'instance_id': zid_store_id.id,
+            'status': 'draft',
+            'attempts': 0,
+            'json': {'data': [data]},
+            'webhook_type': webhook_event
+        }
+        request.env['zid.scheduler.log.line'].sudo().create(data_for_log)
 
     @http.route('/zid/activation', type='http', auth='none', website=True)
     def zid_app_activation(self, **kwargs):
@@ -41,8 +102,6 @@ class Main(http.Controller):
 
         params = {
             'client_id': client_id,
-            # 'redirect_uri': request.env['ir.config_parameter'].sudo().
-            #                                                     get_param('web.base.url') + '/zid/callback',
             'response_type': 'code'
         }
         query_string = urlencode(params)
@@ -197,7 +256,7 @@ class Main(http.Controller):
         # data_for_instance['pricelist_id'] = pricelist_id.id
         #instace creation
         new_instance = request.env['zid.instance.ept'].sudo().create(data_for_instance)
-        create_log_for = ['vat', 'product', 'category','store_locations','product_attributes']
+        create_log_for = ['product', 'category','store_locations','product_attributes']
         common_functions.create_log_in_scheduler(request, new_instance, create_log_for= create_log_for)
         return new_instance
     #

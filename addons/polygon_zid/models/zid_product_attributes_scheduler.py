@@ -18,18 +18,21 @@ class ZidProductAttributeScheduler(models.Model):
     scheduler_log_id = fields.Many2one('zid.scheduler.log.line', string="Scheduler Log", readonly=True)
     attribute_value_count = fields.Integer('Value Count', readonly=True)
     completed_attribute_value = fields.Integer('Completed', readonly=True)
+    attempts = fields.Integer("Scheduler Attempts")
 
-    def create_zid_product_attributes_record(self):
+    def create_zid_product_attributes_record(self, args={}):
         """
         Function to create record in zid product attributes
         :return:
         """
-        draft_attributes = self.search([('status', '=', 'draft')])
+        record_limit = args.get('limit')
+        draft_attributes = self.search(['|', '&', ('status','=','failed'),('attempts','<', 3),('status', '=', 'draft')], limit = record_limit)
         attribute_objs = self.env['zid.product.attributes']
 
         for attribute in draft_attributes:
             try:
                 attribute.status = 'progress'
+                # attribute.attempts += 1
                 input_string = attribute['data']
                 attr = ast.literal_eval(input_string)
                 product_attribute = self.env['product.attribute'].search([('name', '=', attr['name'])])
@@ -53,10 +56,10 @@ class ZidProductAttributeScheduler(models.Model):
 
                 if zid_product_attribute:
                     attribute.product_attribute_id = zid_product_attribute.id or zid_product_attribute.id
-                    attribute.scheduler_log_id.completed_lines += 1
+                    # attribute.scheduler_log_id.completed_lines += 1
                     attribute.attribute_value_count = attr['preset_count']
                     _logger.info('Product Attribute Created!!')
-                    common_functions.update_scheduler_log_state(attribute.scheduler_log_id)
+                    # common_functions.update_scheduler_log_state(attribute.scheduler_log_id)
             except Exception as e:
                 attribute.status = 'failed'
                 _logger.error(str(e))

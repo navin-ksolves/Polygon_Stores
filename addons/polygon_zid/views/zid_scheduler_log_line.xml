@@ -43,6 +43,8 @@
             <tree string="Zid Scheduler Log Line">
                 <field name="instance_id"/>
                 <field name="scheduler_type"/>
+                <field name="completed_lines"/>
+                <field name="total_lines"/>
                 <field name="attempts"/>
                 <field name="status"/>
             </tree>

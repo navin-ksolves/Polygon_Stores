@@ -120,3 +120,6 @@ from . import zid_scheduler_order
 from . import zid_scheduler_order_line
 from . import zid_payment_gateway_ept
 from . import zid_sale_auto_workflow_configuration_ept
+from . import inherit_product_template
+from . import inherit_product_product
+from . import inherit_stock_picking

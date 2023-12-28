@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding='UTF-8'?>
 <odoo>
     <data noupdate="0">
-        <!--        Cron for processing the tasks in scheduler queue-->
+        <!--        Cron for refresh tokens based on there date of expiry-->
+        <record id="cron_refresh_authorize_tokens" model="ir.cron">
+            <field name="name">Refresh Expired Authorize Token</field>
+            <field name="model_id" ref="model_zid_tokens"/>
+            <field name="state">code</field>
+            <field name="code">model.refresh_tokens()</field>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+        <!--       Main Cron:- Cron for processing the tasks in scheduler queue-->
         <record id="cron_for_schedule_log_queue" model="ir.cron">
             <field name="name">Schedule Log Cron</field>
-            <field name="model_id" ref="model_zid_scheduler_log_line"/>
+            <field name="model_id" ref="model_zid_scheduler_log"/>
             <field name="state">code</field>
-            <field name="code">model.run_queue()</field>
+            <field name="code">model.run_queue({'limit':3})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>minutes</field>
             <field name="numbercall">-1</field>
@@ -27,7 +38,7 @@
             <field name="name">Sync Zid State Scheduler</field>
             <field name="model_id" ref="model_zid_scheduler_state"/>
             <field name="state">code</field>
-            <field name="code">model.create_record_in_zid_state_master()</field>
+            <field name="code">model.create_record_in_zid_state_master({'limit':5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
@@ -49,51 +60,51 @@
             <field name="name">Create currency master records</field>
             <field name="model_id" ref="model_zid_scheduler_currency"/>
             <field name="state">code</field>
-            <field name="code">model.create_currency_master_records()</field>
+            <field name="code">model.create_currency_master_records({'limit': 5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
         </record>
 
-        <!--        Cron to create sync logs for store location for each instance-->
-        <record id="cron_sync_store_location_scheduler" model="ir.cron">
-            <field name="name">Create store location sync logs</field>
-            <field name="model_id" ref="model_zid_store_locations"/>
-            <field name="state">code</field>
-            <field name="code">model.create_store_location_sync_logs()</field>
-            <field name='interval_number'>1</field>
-            <field name='interval_type'>days</field>
-            <field name="numbercall">-1</field>
-        </record>
+<!--        &lt;!&ndash;        Cron to create sync logs for store location for each instance&ndash;&gt;-->
+<!--        <record id="cron_sync_store_location_scheduler" model="ir.cron">-->
+<!--            <field name="name">Create store location sync logs</field>-->
+<!--            <field name="model_id" ref="model_zid_store_locations"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.create_store_location_sync_logs()</field>-->
+<!--            <field name='interval_number'>1</field>-->
+<!--            <field name='interval_type'>days</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--        </record>-->
 
         <!--        Cron to create data for store location-->
         <record id="cron_create_store_location_data" model="ir.cron">
             <field name="name">Create store location data</field>
             <field name="model_id" ref="model_zid_store_locations_scheduler"/>
             <field name="state">code</field>
-            <field name="code">model.create_zid_store_location_record()</field>
+            <field name="code">model.create_zid_store_location_record({'limit': 5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
         </record>
 
-        <!--        Cron to create sync logs for attributes for each instance-->
-        <record id="cron_sync_log_product_attributes" model="ir.cron">
-            <field name="name">Create Scheduler Log For Product Attributes</field>
-            <field name="model_id" ref="model_zid_product_attributes"/>
-            <field name="state">code</field>
-            <field name="code">model.create_zid_product_attributes_sync_logs()</field>
-            <field name='interval_number'>1</field>
-            <field name='interval_type'>days</field>
-            <field name="numbercall">-1</field>
-        </record>
+<!--        &lt;!&ndash;        Cron to create sync logs for attributes for each instance&ndash;&gt;-->
+<!--        <record id="cron_sync_log_product_attributes" model="ir.cron">-->
+<!--            <field name="name">Create Scheduler Log For Product Attributes</field>-->
+<!--            <field name="model_id" ref="model_zid_product_attributes"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.create_zid_product_attributes_sync_logs()</field>-->
+<!--            <field name='interval_number'>1</field>-->
+<!--            <field name='interval_type'>days</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--        </record>-->
 
         <!--        Cron to create data for zid.product.attributes-->
         <record id="cron_create_zid_product_attributes_data" model="ir.cron">
             <field name="name">Create Zid Product Attributes</field>
             <field name="model_id" ref="model_zid_product_attributes_scheduler"/>
             <field name="state">code</field>
-            <field name="code">model.create_zid_product_attributes_record()</field>
+            <field name="code">model.create_zid_product_attributes_record({'limit':5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
@@ -104,29 +115,29 @@
             <field name="name">Create Zid Product Attributes Value</field>
             <field name="model_id" ref="model_zid_product_attribute_value_scheduler"/>
             <field name="state">code</field>
-            <field name="code">model.create_zid_product_attribute_value_record()</field>
+            <field name="code">model.create_zid_product_attribute_value_record({'limit': 5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
         </record>
 
         <!--        Cron to create sync logs for products for each instance-->
-        <record id="cron_sync_log_product" model="ir.cron">
-            <field name="name">Create Scheduler Log For Product</field>
-            <field name="model_id" ref="model_zid_product_template"/>
-            <field name="state">code</field>
-            <field name="code">model.create_zid_product_template_sync_logs()</field>
-            <field name='interval_number'>1</field>
-            <field name='interval_type'>days</field>
-            <field name="numbercall">-1</field>
-        </record>
+<!--        <record id="cron_sync_log_product" model="ir.cron">-->
+<!--            <field name="name">Create Scheduler Log For Product</field>-->
+<!--            <field name="model_id" ref="model_zid_product_template"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.create_zid_product_template_sync_logs()</field>-->
+<!--            <field name='interval_number'>1</field>-->
+<!--            <field name='interval_type'>days</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--        </record>-->
 
         <!--        Cron to create zid.product.template record from product scheduler-->
         <record id="cron_create_zid_product_templates" model="ir.cron">
             <field name="name">Create Zid Product Template</field>
             <field name="model_id" ref="model_zid_scheduler_products"/>
             <field name="state">code</field>
-            <field name="code">model.create_zid_product_template()</field>
+            <field name="code">model.create_zid_product_template({'limit':5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
@@ -137,7 +148,7 @@
             <field name="name">Process Zid Order Queue</field>
             <field name="model_id" ref="model_zid_scheduler_order"/>
             <field name="state">code</field>
-            <field name="code">model.process_zid_order_queue()</field>
+            <field name="code">model.process_zid_order_queue({'limit':5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
@@ -148,18 +159,18 @@
             <field name="name">Create Zid Product Category</field>
             <field name="model_id" ref="model_zid_product_category_scheduler"/>
             <field name="state">code</field>
-            <field name="code">model.create_zid_product_category()</field>
+            <field name="code">model.create_zid_product_category({'limit':5})</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
             <field name="numbercall">-1</field>
         </record>
-<!--        Cron to update scheduler log status to done if all line become done-->
+        <!--        Cron to update scheduler log status to done if all line become done-->
         <record id="auto_update_status" model="ir.cron">
             <field name="name">Auto Update Status</field>
             <field name="model_id" ref="model_zid_scheduler_log"/>
             <field name="state">code</field>
             <field name="code">model.check_log_lines_done()</field>
-<!--            <field name="user_id" ref="base.user_root"/>-->
+            <!--            <field name="user_id" ref="base.user_root"/>-->
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
@@ -171,8 +182,18 @@
             <field name="model_id" ref="model_zid_scheduler_log"/>
             <field name="state">code</field>
             <field name="code">model.check_log_lines()</field>
-<!--            <field name="user_id" ref="base.user_root"/>-->
             <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+        <!--        Cron to process order line scheduler record-->
+        <record id="cron_process_order_line_scheduler_record" model="ir.cron">
+            <field name="name">Process Order Line Scheduler Record</field>
+            <field name="model_id" ref="model_zid_scheduler_order_line"/>
+            <field name="state">code</field>
+            <field name="code">model.process_order_line({'limit':5})</field>
+            <field name="interval_number">1</field>
             <field name="interval_type">hours</field>
             <field name="numbercall">-1</field>
         </record>
