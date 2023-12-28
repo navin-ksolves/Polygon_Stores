@@ -49,7 +49,7 @@ class ZidSchedulerOrderLine(models.Model):
                     # 'item_id' : product_variant.product_template_id.id,
                     'sku' : order_line_data['sku'],
                     'quantity' : order_line_data['quantity'],
-                    'price' : order_line_data['price'], #TODO: Ask which price to be used
+                    'price' : order_line_data['price'],
                     'zid_instance_id' : zid_instance_id,
                     'tax_percentage' : order_line_data['tax_percentage']
                 }

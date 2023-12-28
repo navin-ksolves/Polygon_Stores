@@ -21,31 +21,32 @@ class InheritProductTemplate(models.Model):
     @api.depends('image_url')
     def _compute_image_added(self):
         """ Function to load an image from URL or local file path """
-        image = False
-        if self.image_url:
-            if self.image_url.startswith(('http://', 'https://')):
-                # Load image from URL
-                try:
-                    http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED',
-                                               ca_certs=certifi.where())
-                    image_response = http.request('GET', self.image_url)
-                    image = base64.b64encode(image_response.data)
-                except Exception as e:
-                    # Handle URL loading errors
-                    raise UserError(
-                        _(f"Error loading image from URL: {str(e)}"))
-            else:
-                # Load image from local file path
-                try:
-                    with open(self.image_url, 'rb') as image_file:
-                        image = base64.b64encode(image_file.read())
-                except Exception as e:
-                    # Handle local file loading errors
-                    raise UserError(
-                        _(f"Error loading image from local path: {str(e)}"))
-        image_added = image
-        if image_added:
-            self.image_1920 = image_added
+        for product in self:
+            image = False
+            if product.image_url:
+                if product.image_url.startswith(('http://', 'https://')):
+                    # Load image from URL
+                    try:
+                        http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED',
+                                                   ca_certs=certifi.where())
+                        image_response = http.request('GET', self.image_url)
+                        image = base64.b64encode(image_response.data)
+                    except Exception as e:
+                        # Handle URL loading errors
+                        raise UserError(
+                            _(f"Error loading image from URL: {str(e)}"))
+                else:
+                    # Load image from local file path
+                    try:
+                        with open(self.image_url, 'rb') as image_file:
+                            image = base64.b64encode(image_file.read())
+                    except Exception as e:
+                        # Handle local file loading errors
+                        raise UserError(
+                            _(f"Error loading image from local path: {str(e)}"))
+            image_added = image
+            if image_added:
+                product.image_1920 = image_added
 
 
     def _create_variant_ids(self):
