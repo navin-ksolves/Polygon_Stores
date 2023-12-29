@@ -47,6 +47,9 @@ class ZidInstance(models.Model):
     onboarding_stores = fields.Boolean('Onboarding Stores')
     onboarding_products = fields.Boolean('Onboarding Products')
 
+    sync_products = fields.Boolean('Sync Products',default=True, copy=False)
+    sync_orders = fields.Boolean('Sync Orders', default=True, copy=False)
+
     def order_count_for_day(self):
         """Order Count for the day"""
         datetime_now = datetime.datetime.now()

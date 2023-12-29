@@ -181,10 +181,17 @@ def create_log_in_scheduler(self, zid_instance, create_log_for, json_data=False)
             data_json = log_for_product_attributes(self, zid_instance)
 
         elif log == 'product':
-            data_json = log_for_product(self, zid_instance)
-
+            # based on boolean field in instance decide whether to sync products or not
+            if zid_instance.sync_products:
+                data_json = log_for_product(self, zid_instance)
+            else:
+                data_json = {}
         elif log == 'order':
-            data_json = log_for_order(self, zid_instance)
+            # based on boolean field in instance decide whether to sync orders or not
+            if zid_instance.sync_orders:
+                data_json = log_for_order(self, zid_instance)
+            else:
+                data_json = {}
 
         elif log == 'category':
             if not json_data:

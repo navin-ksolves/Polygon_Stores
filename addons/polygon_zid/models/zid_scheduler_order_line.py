@@ -50,6 +50,7 @@ class ZidSchedulerOrderLine(models.Model):
                     'sku' : order_line_data['sku'],
                     'quantity' : order_line_data['quantity'],
                     'price' : order_line_data['price'],
+                    'price_string': order_line_data['price_string'],
                     'zid_instance_id' : zid_instance_id,
                     'tax_percentage' : order_line_data['tax_percentage']
                 }

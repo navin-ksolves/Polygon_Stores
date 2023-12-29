@@ -29,6 +29,8 @@
                             <field name="default_user"/>
                             <field name="sync_with_images"/>
                             <field name="has_multi_inventory"/>
+                            <field name="sync_products"/>
+                            <field name="sync_orders"/>
                         </group>
                     </group>
                     <notebook colspan="4">

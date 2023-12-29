@@ -23,7 +23,7 @@ class ZidSchedulerLogLine(models.Model):
                                        ('sync_states', 'States'), ('store_locations', 'Store Locations'),
                                        ('sync_do_countries_states', 'Sync Countries'), ('webhook', 'Webhook')],
                                       string="Scheduler Type", tracking=True)
-    instance_id = fields.Many2one('zid.instance.ept', string="Instance", tracking=True, required=True, index=True)
+    instance_id = fields.Many2one('zid.instance.ept', string="Instance", tracking=True, required=False, index=True)
     json = fields.Text(string="Json", readonly=True)
     attempts = fields.Integer(string="Attempts", tracking=True, required=True, index=True)
     status = fields.Selection([('draft', 'Draft'), ('progress', 'In Progess'), ('done', 'Done'), ('failed', 'Failed')],
@@ -130,24 +130,25 @@ class ZidSchedulerLogLine(models.Model):
         :return:
         """
         input_string = task['json']
-        instance = task.instance_id
+        # instance = task.instance_id
         # Convert string to dictionary
         result_dict = ast.literal_eval(input_string)
         product_details = result_dict['data']
         product_id = product_details['product_id']
         # find in zid_variant
-        zid_product = self.env['zid.product.variants'].search(('zid_id','=',product_id),('zid_instance_id','=',instance.id))
-        if not zid_product:
-            zid_product = self.env['zid.product.template'].search(('zid_id', '=', product_id),
-                                                                  ('instance_id', '=', instance.id))
-            if zid_product:
+        zid_products = self.env['zid.product.variants'].search(('zid_id','=',product_id))
+        for zid_product in zid_products:
+            if not zid_product:
+                zid_product = self.env['zid.product.template'].search(('zid_id', '=', product_id))
+                if zid_product:
+                    # archive odoo variant and zid product
+                    zid_product.active = False
+                    zid_product.primary_product_id.active = False
+            else:
+                # archive zid product
                 zid_product.active = False
-                zid_product.primary_product_id.active = False
-        else:
-            # archive zid product
-            zid_product.active = False
-            # archive the odoo variant
-            zid_product.product_variant_id.active = False
+                # archive the odoo variant
+                zid_product.product_variant_id.active = False
 
     def change_order_status(self,task):
         """
@@ -155,6 +156,16 @@ class ZidSchedulerLogLine(models.Model):
         :param task:
         :return:
         """
+        input_string = task['json']
+        instance = task.instance_id
+        # Convert string to dictionary
+        result_dict = ast.literal_eval(input_string)
+        for order in result_dict['data']:
+            zid_order = self.env['zid.order.ept'].search([('online_order_id','=',order['id']),('instance_id','=',instance.id)])
+            #find zid order
+            if zid_order:
+                zid_order.order_status = order['order_status']['code']
+        task.status = 'done'
 
     def update_product_qty(self, task):
         """
