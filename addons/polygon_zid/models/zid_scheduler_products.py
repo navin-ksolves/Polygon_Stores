@@ -62,7 +62,8 @@ class ZidProductScheduler(models.Model):
                         'requires_shipping': product_template.get('requires_shipping'),
                         'is_taxable': product_template.get('is_taxable'),
                         'structure': product_template.get('structure'),
-                        'is_published': product_template.get('is_published')
+                        'is_published': product_template.get('is_published'),
+                        'quantity': product_template.get('quantity')
                     }
                     zid_product_template = product_objs.create(vals)
                     if zid_product_template:

@@ -7,10 +7,17 @@
         <field name="arch" type="xml">
             <form string="Zid Product Template Details">
                 <sheet>
+                     <div class="oe_title">
+                        <label for="name" string="Product Name"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="text-break" name="name"/>
+                            </div>
+                        </h1>
+                    </div>
                     <field name="product_image" nolabel="1" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
-                            <field name="name"/>
                             <field name="owner_id"/>
                             <field name="instance_id"/>
                             <field name="zid_product_categ_id"/>

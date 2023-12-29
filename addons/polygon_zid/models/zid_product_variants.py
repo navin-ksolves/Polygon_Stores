@@ -70,6 +70,11 @@ class ZidProductVariants(models.Model):
             return product_variant
         else:
             odoo_product_variant = self.search_correct_odoo_variant(vals)
+            if odoo_product_variant and vals.get('quantity'):
+                stock_id = self.env['stock.location'].browse(8)
+                self.env['stock.quant']._update_available_quantity(odoo_product_variant, stock_id, vals[
+                    'quantity'])  #TODO: make warehose dynamic
+
             if not odoo_product_variant:
                 raise ValidationError("Suitable Variant Combination For Product Doesn't Exists!!")
             else:
@@ -79,6 +84,13 @@ class ZidProductVariants(models.Model):
                     product_type = 'product'
                 else:
                     product_type = 'service'
+
+                # remove description if it's an empty dictionary
+                if not isinstance(vals['description'], dict):
+                    description = vals['description']
+                else:
+                    description = False
+                    del vals['description']
                 odoo_product_variant.write({
                     'detailed_type': product_type,
                     # 'name' : 'Zid '+ vals['name'],
@@ -88,7 +100,7 @@ class ZidProductVariants(models.Model):
                     'purchase_ok': False,
                     'invoice_policy': 'order',
                     'product_variant_owner': vals['owner_id'],
-                    'description': vals['description']
+                    'description': description
                 })
                 zid_product_template = self.env['zid.product.template'].search(
                     [('zid_id', '=', vals['zid_parent_id']),

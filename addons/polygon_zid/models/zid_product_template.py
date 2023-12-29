@@ -72,6 +72,8 @@ class ZidProductTemplate(models.Model):
         product_template = product_template_obj.search([('name', '=', vals['name']),
                                                                 ('product_owner', '=', vals['owner_id'])], limit=1)
         if product_template:
+            if vals.get('quantity'):
+                del vals['quantity']
 
             # Update values in the product template:
             product_template.write({'name': vals['name'],
@@ -113,8 +115,13 @@ class ZidProductTemplate(models.Model):
                                                                     # 'categ_id': cengine_product_categ_id.category_id.id #TODO: create category for product
                                                                     })
 
+            product_id = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)], limit=1)
+            if product_id and vals.get('quantity'):
+                stock_id = self.env['stock.location'].browse(8)
+                self.env['stock.quant']._update_available_quantity(product_id, stock_id, vals[
+                    'quantity'])  # TODO: ask where quantity to be updated
+                del vals['quantity']
         product_id = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)], limit=1)
-
         vals['primary_product_id'] = product_id.id
         vals['product_template_id'] = product_template.id
 
