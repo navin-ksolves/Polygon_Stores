@@ -70,7 +70,7 @@ class ZidProductVariants(models.Model):
             return product_variant
         else:
             odoo_product_variant = self.search_correct_odoo_variant(vals)
-            if odoo_product_variant and vals.get('quantity'):
+            if odoo_product_variant and  'quantity' in vals.keys():
                 stock_id = self.env['stock.location'].browse(8)
                 self.env['stock.quant']._update_available_quantity(odoo_product_variant, stock_id, vals[
                     'quantity'])  #TODO: make warehose dynamic
@@ -100,7 +100,8 @@ class ZidProductVariants(models.Model):
                     'purchase_ok': False,
                     'invoice_policy': 'order',
                     'product_variant_owner': vals['owner_id'],
-                    'description': description
+                    'description': description,
+                    'standard_price': vals['sale_price'] or vals['price'],
                 })
                 zid_product_template = self.env['zid.product.template'].search(
                     [('zid_id', '=', vals['zid_parent_id']),

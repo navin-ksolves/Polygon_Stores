@@ -116,6 +116,7 @@ class ZidSchedulerLogLine(models.Model):
             task.attempts = 0
         elif task.webhook_type in ['product.delete']:
             self.archive_zid_product(task)
+            task.status = 'done'
         elif task.webhook_type == 'order.create':
             task.scheduler_type = 'order'
             task.status = 'draft'
@@ -134,21 +135,22 @@ class ZidSchedulerLogLine(models.Model):
         # Convert string to dictionary
         result_dict = ast.literal_eval(input_string)
         product_details = result_dict['data']
-        product_id = product_details['product_id']
-        # find in zid_variant
-        zid_products = self.env['zid.product.variants'].search(('zid_id','=',product_id))
-        for zid_product in zid_products:
-            if not zid_product:
-                zid_product = self.env['zid.product.template'].search(('zid_id', '=', product_id))
-                if zid_product:
-                    # archive odoo variant and zid product
+        for product_detail in product_details:
+            product_id = product_detail['product_id']
+            # find in zid_variant
+            zid_products = self.env['zid.product.variants'].search([('zid_id','=',product_id)])
+            for zid_product in zid_products:
+                if not zid_product:
+                    zid_product = self.env['zid.product.template'].search([('zid_id', '=', product_id)])
+                    if zid_product:
+                        # archive odoo variant and zid product
+                        zid_product.active = False
+                        zid_product.primary_product_id.active = False
+                else:
+                    # archive zid product
                     zid_product.active = False
-                    zid_product.primary_product_id.active = False
-            else:
-                # archive zid product
-                zid_product.active = False
-                # archive the odoo variant
-                zid_product.product_variant_id.active = False
+                    # archive the odoo variant
+                    zid_product.product_variant_id.active = False
 
     def change_order_status(self,task):
         """

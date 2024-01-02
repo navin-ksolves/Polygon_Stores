@@ -43,6 +43,10 @@ class ZidProductTemplate(models.Model):
         :param vals:
         :return:
         """
+        quantity = 0
+        if 'quantity' in vals.keys():
+            quantity = vals['quantity']
+            del vals['quantity']
         _logger.info("Creating Zid Product Template")
         _logger.info(vals)
         if isinstance(vals['name'], dict):
@@ -72,9 +76,6 @@ class ZidProductTemplate(models.Model):
         product_template = product_template_obj.search([('name', '=', vals['name']),
                                                                 ('product_owner', '=', vals['owner_id'])], limit=1)
         if product_template:
-            if vals.get('quantity'):
-                del vals['quantity']
-
             # Update values in the product template:
             product_template.write({'name': vals['name'],
                                     'description': vals['description'],
@@ -116,10 +117,9 @@ class ZidProductTemplate(models.Model):
                                                                     })
 
             product_id = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)], limit=1)
-            if product_id and vals.get('quantity'):
+            if product_id and quantity:
                 stock_id = self.env['stock.location'].browse(8)
-                self.env['stock.quant']._update_available_quantity(product_id, stock_id, vals[
-                    'quantity'])  # TODO: ask where quantity to be updated
+                self.env['stock.quant']._update_available_quantity(product_id, stock_id, quantity)
                 del vals['quantity']
         product_id = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)], limit=1)
         vals['primary_product_id'] = product_id.id
