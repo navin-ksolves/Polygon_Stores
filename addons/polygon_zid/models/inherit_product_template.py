@@ -75,18 +75,18 @@ class InheritProductTemplate(models.Model):
 
             # adding an attribute with only one value should not recreate product
             # write this attribute on every product to make sure we don't lose them
-            single_value_lines = lines_without_no_variants.filtered(
-                lambda ptal: len(ptal.product_template_value_ids._only_active()) == 1)
-            if single_value_lines:
-                for variant in all_variants:
-                    combination = variant.product_template_attribute_value_ids | single_value_lines.product_template_value_ids._only_active()
-                    # Do not add single value if the resulting combination would
-                    # be invalid anyway.
-                    if (
-                            len(combination) == len(lines_without_no_variants) and
-                            combination.attribute_line_id == lines_without_no_variants
-                    ):
-                        variant.product_template_attribute_value_ids = combination
+            # single_value_lines = lines_without_no_variants.filtered(
+            #     lambda ptal: len(ptal.product_template_value_ids._only_active()) == 1)
+            # if single_value_lines:
+            #     for variant in all_variants:
+            #         combination = variant.product_template_attribute_value_ids | single_value_lines.product_template_value_ids._only_active()
+            #         # Do not add single value if the resulting combination would
+            #         # be invalid anyway.
+            #         if (
+            #                 len(combination) == len(lines_without_no_variants) and
+            #                 combination.attribute_line_id == lines_without_no_variants
+            #         ):
+            #             variant.product_template_attribute_value_ids = combination
 
             # Set containing existing `product.template.attribute.value` combination
             existing_variants = {

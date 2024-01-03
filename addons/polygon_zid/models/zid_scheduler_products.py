@@ -71,6 +71,13 @@ class ZidProductScheduler(models.Model):
 
                 else:
                     # self.create_variant_record(product_template)
+                    product_id = product_template['parent_id']
+                    if len(product_template.get('attributes')):
+                        # product_template['attributes'] = product_variants
+                        instance_id = product.scheduler_log_id.instance_id.id
+                        zid_product_template_for_variant = self.env['zid.product.template'].search([('zid_id','=',product_id)], limit=1)
+                        if zid_product_template_for_variant:
+                            self.create_variant_record(product_template, instance_id, zid_product_template_for_variant)
                     zid_product_template = self.sync_product_variant(product_template, product)
                 # Creating variants record in log
                 if not product_template['parent_id']:
@@ -136,7 +143,7 @@ class ZidProductScheduler(models.Model):
 
     def sync_product_variant(self, product_template, product, product_category=False):
         """
-        Helper function to create record in zid_variant
+        Helper function to create record in zid_variant and link odoo variant with zid variant
         :param product: dictionary of product json
         :param product_template:zid.scheduler.product record
         :return: zid_variant record

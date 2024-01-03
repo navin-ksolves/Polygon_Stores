@@ -105,7 +105,30 @@ def log_for_product(self, zid_instance):
     headers['Store-Id'] = store_id
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return {'data': response.json()['results']}
+        flag = False
+        new_url = False
+        data_json = {'data': response.json()['results']}
+        if response.json().get('next'):
+            flag = True
+            new_url = response.json().get('next')
+        # total_product_count = response.json().get('count', 0)
+        while flag:
+            new_response = requests.get(new_url, headers=headers)
+            if new_response.status_code == 200:
+                data_for_log = {
+                    'scheduler_type': 'product',
+                    'instance_id': zid_instance.id,
+                    'status': 'draft',
+                    'attempts': 0,
+                    'json': {'data': new_response.json()['results']}
+                }
+                self.env['zid.scheduler.log.line'].sudo().create(data_for_log)
+                if not new_response.json().get('next'):
+                    flag = False
+                else:
+                    flag = True
+                    new_url = new_response.json().get('next')
+        return data_json
     return {}
 def log_for_order(self, zid_instance):
     """
@@ -133,7 +156,7 @@ def log_for_order(self, zid_instance):
             page = 2
             while order_left_to_sync != 0:
                 url = "https://api.zid.sa/v1/managers/store/orders"
-                querystring = {"page": page, "per_page": "10"}
+                querystring = {"page": str(page), "per_page": "10"}
                 headers = fetch_authentication_details(self, zid_instance.id)
                 new_response = requests.get(url, headers=headers, params=querystring)
                 if new_response.status_code == 200:
@@ -142,7 +165,7 @@ def log_for_order(self, zid_instance):
                         'instance_id': zid_instance.id,
                         'status': 'draft',
                         'attempts': 0,
-                        'json': data_json
+                        'json': {'data': new_response.json()['orders']}
                     }
                     self.env['zid.scheduler.log.line'].sudo().create(data_for_log)
                     page += 1
@@ -270,6 +293,7 @@ def update_zid_order_status_based_on_picking(self, related_so,picking, tracking_
 
         if picking_cancelled:
             zid_status = 'cancelled'
+            zid_order.order_status = 'cancelled'
         else:
             zid_status = get_zid_status(self, related_so.delivery_status,picking.state,tracking_url)
         # payload = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"order_status\"\r\n\r\nnew\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"inventory_address_id\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"tracking_number\"\r\n\r\n456777\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"tracking_url\"\r\n\r\nwww\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"waybill_url\"\r\n\r\n\r\n-----011000010111000001101001--\r\n"
@@ -281,9 +305,10 @@ def update_zid_order_status_based_on_picking(self, related_so,picking, tracking_
             payload = f"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"order_status\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"inventory_address_id\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"tracking_number\"\r\n\r\n{related_so.name}\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"tracking_url\"\r\n\r\n{tracking_url}\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"waybill_url\"\r\n\r\n\r\n-----011000010111000001101001--\r\n"
         headers = common_functions.fetch_authentication_details(self, related_so.zid_instance_id.id)
         headers['Content-Type'] = "multipart/form-data; boundary=---011000010111000001101001"
-        response = requests.post(url, data=payload, headers=headers)
-
-        print('HELLLOOO++++++',response.json())
+        if zid_status != zid_order.order_status:
+            response = requests.post(url, data=payload, headers=headers)
+            if response.status_code == 200:
+                zid_order.order_status = zid_status
 
 def get_zid_status(self, order_status, picking_status,tracking_url=False):
     """

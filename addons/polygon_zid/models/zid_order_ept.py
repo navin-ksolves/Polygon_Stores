@@ -32,7 +32,7 @@ class ZidOrderEpt(models.Model):
     total_tax = fields.Float(string="Total Tax", tracking=True)
     total_price = fields.Float(string="Total Price", tracking=True)
     delivery_address_id = fields.Many2one('zid.customer.locations','Delivery Address')
-    order_status =fields.Char('Zid Order Status')
+    order_status = fields.Char('Zid Order Status')
     zid_order_line_ids = fields.One2many('zid.order.lines.ept','order_id', string='Zid Order Lines')
 
     def create(self, vals):

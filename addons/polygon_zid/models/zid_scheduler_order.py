@@ -67,6 +67,10 @@ class ZidSchedulerOrder(models.Model):
                         'state' : state.id if state else False,
                         'country' : country.id if country else False
                     }
+                    if full_order_data.get('has_different_consignee'):
+                        address_vals['name'] = full_order_data.get('consignee').get('name')
+                        address_vals['email'] = full_order_data.get('consignee').get('email')
+                        address_vals['phone'] = full_order_data.get('consignee').get('mobile')
                     customer_location = self.env['zid.customer.locations'].create(address_vals)
 
                 if zid_customer:
@@ -101,8 +105,10 @@ class ZidSchedulerOrder(models.Model):
                 }
                 _logger.info('Creating order with vals: %s' % zid_order_vals)
                 order_record = order_objs.create(zid_order_vals)
-
                 if order_record:
+                    if customer_location.address_id:
+                        order_record.so_id.partner_shipping_id = customer_location.address_id.id
+                    # order_record.so_id.partner_shipping_id =
                     _logger.info('Order created! Order ID: %s, processing other items' % order[0])
                     # order.store_location_id = store_location_id.id
                     # order.status = 'done'

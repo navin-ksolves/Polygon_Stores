@@ -113,12 +113,11 @@ class ZidProductTemplate(models.Model):
                                                                     # 'use_time': 7,
                                                                     # 'removal_time': 7,
                                                                     # 'alert_time': 14,
-                                                                    # 'categ_id': cengine_product_categ_id.category_id.id #TODO: create category for product
                                                                     })
 
             product_id = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)], limit=1)
             if product_id and quantity:
-                stock_id = self.env['stock.location'].browse(8)
+                stock_id = self.env.ref('stock.stock_location_stock').id
                 self.env['stock.quant']._update_available_quantity(product_id, stock_id, quantity)
                 del vals['quantity']
         product_id = self.env['product.product'].search([('product_tmpl_id', '=', product_template.id)], limit=1)

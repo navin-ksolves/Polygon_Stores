@@ -71,7 +71,7 @@ class ZidProductVariants(models.Model):
         else:
             odoo_product_variant = self.search_correct_odoo_variant(vals)
             if odoo_product_variant and  'quantity' in vals.keys():
-                stock_id = self.env['stock.location'].browse(8)
+                stock_id = self.env.ref('stock.stock_location_stock').id
                 self.env['stock.quant']._update_available_quantity(odoo_product_variant, stock_id, vals[
                     'quantity'])  #TODO: make warehose dynamic
 

@@ -21,6 +21,7 @@
                         <group>
                             <field name="order_datetime"/>
                             <field name="fulfillment_status"/>
+                            <field name="order_status"/>
                             <field name="financial_status"/>
                             <field name="currency"/>
                         </group>

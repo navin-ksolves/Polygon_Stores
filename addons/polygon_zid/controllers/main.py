@@ -54,7 +54,7 @@ class InheritDeliveryCarrier(DeliveryCarrier):
 
 class Main(http.Controller):
 
-    @http.route(['/zid/product', '/zid/order'], type='json', auth='none', methods=['POST'], csrf=False)
+    @http.route(['/zid/product', '/zid/order', '/zid/activation'], type='json', auth='none', methods=['POST'], csrf=False)
     def zid_webhook(self, **kwargs):
         """
         Function to create log for webhook in scheduler_log_line using the data from webhook
@@ -72,16 +72,6 @@ class Main(http.Controller):
             'webhook_type': webhook_event
         }
         request.env['zid.scheduler.log.line'].sudo().create(data_for_log)
-
-    @http.route('/zid/activation', type='http', auth='none', website=True)
-    def zid_app_activation(self, **kwargs):
-        """
-
-        :param kwargs:
-        :return:
-        """
-        rec = kwargs
-        return rec
 
     @http.route('/zid/redirect', type='http', auth='none', csrf=False)
     def redirect(self, **kwargs):
@@ -143,6 +133,7 @@ class Main(http.Controller):
         zid_token = self.create_zid_token(response_json)
         # Get Manager Profile and Store in Odoo
         self.create_manager_profile(response_json, zid_token, app_id)
+        return redirect('https://web.zid.sa/account/settings/shipping-options')
 
     def create_zid_token(self, response_data):
         """

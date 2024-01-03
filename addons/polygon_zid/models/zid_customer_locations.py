@@ -20,6 +20,8 @@ class ZidCustomerLocations(models.Model):
     active = fields.Boolean(string="Active", default=True, tracking=True)
     state = fields.Many2one('zid.state.master', 'City', tracking=True)
     country = fields.Many2one('zid.country.master', 'Country', tracking=True)
+    phone = fields.Char('Phone')
+    email = fields.Char('Email')
 
     def create(self, vals):
         address = super(ZidCustomerLocations, self).create(vals)
@@ -32,8 +34,13 @@ class ZidCustomerLocations(models.Model):
                 'street': vals.get('street'),
                 'city': city.display_name,
                 'country_id': country.odoo_country.id if country else False,
-                'type' : 'delivery' if vals['is_shipping'] else 'invoice'
+                'type' : 'delivery' if vals['is_shipping'] else 'invoice',
+                'email': vals.get('email'),
+                'phone': vals.get('phone'),
+                'name': vals.get('name')
             }
-            partner_record.create(partner_address_vals)
+            odoo_address = partner_record.create(partner_address_vals)
+            if odoo_address:
+              address['address_id']  = odoo_address.id
         # Create address in res_partner record
         return address
